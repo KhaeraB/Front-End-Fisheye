@@ -1,22 +1,23 @@
-export default class Api {
+class Api {
     /**
      * 
      * @param {string} url 
      */
     constructor(url) {
         this._url = url
-    }
-
+    } 
     async get() {
+      
         return fetch(this._url)
             .then(res => res.json())
-            .then(res => res.data)
+            .then((data) => {
+                return data})
             .catch(err => console.log('an error occurs', err))
     }
 }
 
 
-class AllPhotographers extends Api {
+export default class AllPhotographers extends Api {
     /**
      * 
      * @param {string} url 
@@ -26,6 +27,6 @@ class AllPhotographers extends Api {
     }
 
     async getPhotographers() {
-        return await AllPhotographers.photographers
+        return await this.get()
     }
 }

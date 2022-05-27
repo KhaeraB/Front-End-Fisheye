@@ -1,44 +1,46 @@
 export default class GetHomePhotographers {
     constructor(data) {
-        this.name = data.name,
-        this.id = data.id,
-        this.city = data.city, 
-        this.country = data.country, 
-        this.tagline = data.tagline, 
-        this.price = data.price, 
-        this.portrait = portrait
+        this._name = data.name
+        this._id = data.id
+        this._city = data.city 
+        this._country = data.country 
+        this._tagline = data.tagline 
+        this._price = data.price
+        this._portrait = data.portrait
     }
 
     get name(){
-        return this.name; 
-    }
+        return this._name }; 
+
+
 
     get id(){
-        return this.id; 
+        return  this._id; 
     }
+   
 
     get city(){
-        return this.city; 
+        return  this._city; 
     }
+   
 
     get country(){
-        return this.country; 
+        return  this._country; 
     }
 
     get tagline(){
-        return this.tagline; 
+        return this._tagline; 
     }
 
     get price(){
-        return this.price; 
+        return this._price; 
     }
 
     get portrait(){
-        return `/assets/photographers/photographerId/${this._picture}` 
+        return `../../assets/photographers/photographerId/${this._portrait}` 
     }
-   
-   
 }
+
 
     
     

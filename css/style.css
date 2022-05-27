@@ -15,7 +15,7 @@ header {
 }
 
 h1 {
-    color: #901C1C;
+    color: #ff4d4d;
     margin-right: 100px;
 }
 
@@ -28,23 +28,53 @@ h1 {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 70px;
-    margin-top: 100px;
+    margin:100px 0;
 }
 
-.photographer_section article {
+.photographer_section article{
     justify-self: center;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    line-height: 1em;
 }
 
-.photographer_section article h2 {
+.photographer_section article a{
+    text-decoration: none;
+    text-align: center;
+}
+
+.photographer_section article a h2 {
     color: #D3573C;
     font-size: 36px;
+    margin-bottom: 7%;
 }
 
-.photographer_section article img {
+.photographer_section article a img {
     height: 200px;
     width: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
+    background-size: 20%;
+}
+.photographer_section article a img::before, .photographer_section article a img::after {
+    height: 400px;
+    width: 400px;
+}
+
+.photographer_section article  h4 {
+    color: #D3573C;
+    font-size: 13px;
+    margin: 0;
+}
+.photographer_section article p{
+    font-size: 10px;
+    margin: 0;
+}
+.photographer_section article small{
+    font-size: 9px;
+    color: #757575;
+    margin: 0;
 }
