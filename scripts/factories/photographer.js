@@ -1,17 +1,11 @@
-function photographerFactory(data) {
-    const { name, portrait } = data;
-
-    const picture = `assets/photographers/${portrait}`;
-
-    function getUserCardDOM() {
-        const article = document.createElement( 'article' );
-        const img = document.createElement( 'img' );
-        img.setAttribute("src", picture)
-        const h2 = document.createElement( 'h2' );
-        h2.textContent = name;
-        article.appendChild(img);
-        article.appendChild(h2);
-        return (article);
+export default class PhotographerFactory {
+    constructor(data, type) {
+        // Si le type correspond à l'ancienne API, alors retourne moi l'ancien formattage
+        if (type === 'photographersApi') {
+            return new Api(data)
+        
+        } else {
+            throw 'Unknown type format'
+        }
     }
-    return { name, picture, getUserCardDOM }
 }
