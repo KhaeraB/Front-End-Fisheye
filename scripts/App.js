@@ -13,20 +13,34 @@ export default class App {
     async displayPhotographers() {
         const photographersData = await this.photographersApi.get()
         const onlyPhotographers = photographersData.photographers
-        console.log(onlyPhotographers)
         const UsersPhotographers = onlyPhotographers.map(photographers => new PhotographerFactory(photographers, 'photographersApi'))
       
        
 
         UsersPhotographers.forEach(photographer => {
                 const Template = new PhotographersHomeCard(photographer)
-                console.log(Template)
+               
                 this.$usersWrapper.appendChild(
                     Template.createUserCard()
                 )
             })
     }
+    /*async displaySinglePage() {
+        const photographersData = await this.photographersApi.get()
+        const FullData = photographersData
+        console.log(FullData)
+       
+
+        FullData.forEach(photographer => {
+                const Template = new PhotographersHomeCard(photographer)
+                console.log(Template)
+                this.$usersWrapper.appendChild(
+                    Template.createUserCard()
+                )
+            })
+    }*/
 }
 
 const app = new App()
 app.displayPhotographers()
+//app.displaySinglePage()
