@@ -4,8 +4,7 @@
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="assets/favicon.ico">
     <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
     <title>Fisheye - photographe </title>
   </head>
   <body>
@@ -13,10 +12,28 @@
       <img src="assets/images/logo.png" class="logo" />
     </header>
     <main id="main">
-      <div class="photograph-header">
+      <div id="photograph-header">
+        <div class="photograph-info"></div>
         <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+        <div class="photograph-avatar"></div>
       </div>
+      <section id="gallery">
+        <div id="filter">
+          <p>Trier par</p>
+          <select name="popularité" id="">
+            <option value="hidden">Popularité</option>
+            <option value="date">Date</option>
+            <option value="title">Titre</option>
+          </select>
+        </div>
+        <div id="images-gallery">
+
+        </div>
+      </section>
     </main>
+  <section id="likes_price">
+    
+  </section>
     <div id="contact_modal">
 			<div class="modal">
 				<header>
@@ -32,6 +49,8 @@
 				</form>
 			</div>
 		</div>
+    <script type="module" src="index.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
+
   </body>
 </html>

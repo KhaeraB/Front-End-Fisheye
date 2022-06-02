@@ -1,11 +1,10 @@
 import GetHomePhotographers from "../models/home.js "
 
 export default class PhotographerFactory {
-    constructor(data, type) {
+    constructor(data) {
         // Si le type correspond à l'ancienne API, alors retourne moi l'ancien formattage
-        if (type === 'photographersApi') {
+        if (data) {
             return new GetHomePhotographers(data)
-        
         } else {
             throw 'Unknown type format'
         }
