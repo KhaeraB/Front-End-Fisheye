@@ -1,9 +1,9 @@
-export default class SinglePageContent{
+export default class MainContentPhotographer{
     constructor(photographers) {
         this._photographers = photographers
         this.$infosElement = document.querySelector('#main .photograph-info')
         this.$avatarElement = document.querySelector('#main .photograph-avatar')
-        this.$bannerInfoElement =document.querySelector('#like_price .banner_info_price')
+        
     }
     
     async createUserInfoCard() {
@@ -18,14 +18,14 @@ export default class SinglePageContent{
        const avatar = 
         `<img src="${this._photographers.portrait}" alt="photo de ${this._photographers.name}">`
       
-        const price = 
-       `<p>${this._photographers.price}</p> / jour`
+        //const price = 
+       //`<p>${this._photographers.price}</p> / jour`
 
 
 
         this.$infosElement.innerHTML = infoPhotograph
         this.$avatarElement.innerHTML = avatar
-        this.$bannerInfoElement.innerHTML = price
+       
         
     }   
 }

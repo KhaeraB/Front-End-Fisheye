@@ -9,4 +9,4 @@ import GetSinglePage from '/scripts/templates/PhotographersHomeCard.js'
 import AllPhotographers from '/scripts/api/Api.js';
 
 import Home from '/scripts/home.js';
-import SinglePage from './scripts/singlepage.js';
+import HeaderSinglePage from '/scripts/headerSinglePage.js';

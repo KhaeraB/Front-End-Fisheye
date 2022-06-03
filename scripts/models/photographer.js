@@ -92,6 +92,7 @@ export default class GetSinglePage{
 
     
     get image(){
+   
         return `../../assets/photographers/${this.namePhotographer}/${this._image}` 
     }
 }

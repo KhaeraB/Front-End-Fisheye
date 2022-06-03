@@ -2,54 +2,62 @@ import AllPhotographers from "./api/Api.js"
 
 import ProfilFactory from "./factories/profilPhotographer.js"
 
-import SinglePageContent from "./templates/SinglePageContent.js"
+import MainContentPhotographer from "./templates/SinglePageContent.js"
 import GetPhotoGallery from "./templates/GetPhotoGallery.js"
 import GetLikes from "./templates/Getlikes.js"
 
 
-export default class SinglePage {
+export default class HeaderSinglePage{
     constructor() {
-        this.$userInfoProfil = document.getElementById('photograph-header')
-        this.$userImagesProfil = document.getElementById('images-gallery')
-        this.$likesElement = document.getElementById('likes_price')
+        this.$userInfoProfil = document.querySelectorAll('#main #photograph-header')
+        this.$userImagesProfil = document.querySelectorAll('#main #images-gallery')
+        this.$priceDay = document.querySelectorAll('#likes_price .price')
+        this.$likesElement = document.querySelectorAll('#likes_price')
+
         this.mediasApi = new AllPhotographers('../data/fisheye-data.json')
+
         this.idUrl = new URL(window.location.href).searchParams.get("id")
+        
         this.namePhotographer
     }
-    async displayPhotographers() {
-      const photographersData = await this.mediasApi.getPhotographers()
+    async displayCardPhotographers() {
+        const photographersData = await this.mediasApi.getPhotographers()
         const data = photographersData
         const InfoPhotographers = data.map(medias => new ProfilFactory(medias, this.idUrl))
    
-        InfoPhotographers.forEach(media => {
-            if(this.idUrl == media.id){
-                const ProfilTemplate = new SinglePageContent(media, this.idUrl)
+        InfoPhotographers.forEach(user => {
+            if(this.idUrl == user.id){
+                const ProfilTemplate = new MainContentPhotographer(user, this.idUrl)
                
-                this.$userInfoProfil.appendChild(
+                this.$userInfoProfil.append(
                     ProfilTemplate.createUserInfoCard()
+                )
+                this.$priceDay.append(
+                    `${media.price}€ / jour`
                 )
             } 
         })
     }
     async displayImagesPhotographers() {
         const galleryPhotographers = await this.mediasApi.getPhotos()
-        const imagesData = galleryPhotographers
-        const galleriesImages = imagesData.map(medias => new ProfilFactory(medias, this.idUrl))
+        const imagesData = [...galleryPhotographers]
+        const galleriesImages = imagesData.map(media => new ProfilFactory(media, this.idUrl))
     
         galleriesImages.forEach(photo => {
-           
+
             if(photo.photographerId == this.idUrl){
-                let PhotoTemplate = new GetPhotoGallery(photo, this.idUrl, this.namePhotographer);
-                this.$userImagesProfil.appendChild(
-                    PhotoTemplate.createUserGalleries()
-                );
+                const MediaTemplate = new GetPhotoGallery(photo, this.idUrl, this.namePhotographer)
+
+                this.$userImagesProfil.append(
+                    MediaTemplate.createUserGalleries()
+                )
             } 
         });
     }  
 
     async displayLikes() {
         const likesPhotographers = await this.mediasApi.getLikes()
-        const likesData = likesPhotographers
+        const likesData = [...likesPhotographers]
         const viewLikes = likesData.map(medias => new ProfilFactory(medias, this.idUrl))
         
         viewLikes.forEach(like => {
@@ -69,7 +77,7 @@ export default class SinglePage {
     
 }
 
-const app = new SinglePage()
-app.displayPhotographers() 
+const app = new HeaderSinglePage()
+app.displayCardPhotographers() 
 app.displayImagesPhotographers()
 app.displayLikes()

@@ -11,10 +11,11 @@ export default class GetLikes{
        const likes_price = 
         `
             <div class="banner_info">
-                <p>${this._media.totalLikes}</p>
-                <i class="fa fa-heart" aria-hidden="true"></i>
+            <p>${this._media.likes}</p>
+            <i class="fa fa-heart" aria-hidden="true"></i>
             </div>
-            <div class="banner_info_price"></div>
+            <div class="banner_info price">
+            </div>
         `
         this.$likesElement.innerHTML =likes_price
         
