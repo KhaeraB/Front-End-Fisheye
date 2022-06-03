@@ -29,26 +29,26 @@ export default class HeaderSinglePage{
             if(this.idUrl == user.id){
                 const ProfilTemplate = new MainContentPhotographer(user, this.idUrl)
                
-                this.$userInfoProfil.append(
+                this.$userInfoProfil.appendChild(
                     ProfilTemplate.createUserInfoCard()
                 )
-                this.$priceDay.append(
-                    `${media.price}€ / jour`
+                this.$priceDay.appendChild(
+                    `${user.productPrice}€ / jour`
                 )
             } 
         })
     }
     async displayImagesPhotographers() {
         const galleryPhotographers = await this.mediasApi.getPhotos()
-        const imagesData = [...galleryPhotographers]
+        const imagesData = galleryPhotographers
         const galleriesImages = imagesData.map(media => new ProfilFactory(media, this.idUrl))
-    
+    console.log(galleriesImages)
         galleriesImages.forEach(photo => {
 
             if(photo.photographerId == this.idUrl){
                 const MediaTemplate = new GetPhotoGallery(photo, this.idUrl, this.namePhotographer)
 
-                this.$userImagesProfil.append(
+                this.$userImagesProfil.appendChild(
                     MediaTemplate.createUserGalleries()
                 )
             } 
@@ -57,7 +57,7 @@ export default class HeaderSinglePage{
 
     async displayLikes() {
         const likesPhotographers = await this.mediasApi.getLikes()
-        const likesData = [...likesPhotographers]
+        const likesData = likesPhotographers
         const viewLikes = likesData.map(medias => new ProfilFactory(medias, this.idUrl))
         
         viewLikes.forEach(like => {
@@ -68,7 +68,6 @@ export default class HeaderSinglePage{
             let LikeTemplate = new GetLikes(like, this.idUrl);
             this.$likesElement.append(
             LikeTemplate.createUserLikes());
-            
             
         });
         

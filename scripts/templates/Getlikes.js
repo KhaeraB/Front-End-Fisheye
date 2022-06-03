@@ -14,7 +14,7 @@ export default class GetLikes{
             <p>${this._media.likes}</p>
             <i class="fa fa-heart" aria-hidden="true"></i>
             </div>
-            <div class="banner_info price">
+            <div class="banner_info_price">
             </div>
         `
         this.$likesElement.innerHTML =likes_price
