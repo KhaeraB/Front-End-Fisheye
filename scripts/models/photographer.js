@@ -1,5 +1,5 @@
 export default class GetSinglePage{
-    constructor(data, idUrl, namePhotographer) {
+    constructor(data, idUrl) {
         this._name = data.name
         this._id = data.id
         
@@ -11,11 +11,11 @@ export default class GetSinglePage{
         this._photographerId  = data.photographerId
         this._title = data.title
         this._image = data.image
+        this._video = data.video
         this._likes = data.likes
-        this._productPrice = data.price 
+        this._photographerPrice = data.price 
 
         this._idUrl = idUrl
-        this._namePhotographer = namePhotographer
     }
 
     get name(){
@@ -42,8 +42,8 @@ export default class GetSinglePage{
         return this._tagline; 
     }
 
-    get productPrice(){
-        return this._productPrice; 
+    get photographerPrice(){
+        return this._photographerPrice; 
     }
 
     get portrait(){
@@ -62,37 +62,13 @@ export default class GetSinglePage{
         return  this._likes;  
     }
 
-    get namePhotographer(){
-        let idURL = new URL(window.location.href).searchParams.get("id");
-        this._namePhotographer = ""
-        switch (idURL) {
-            case "243":
-            this._namePhotographer = "Mimi";
-            break;
-            case "930":
-            this._namePhotographer = "Ellie Rose";
-            break;
-            case "82":
-            this._namePhotographer = "Tracy";
-            break;
-            case "527":
-            this._namePhotographer = "Nabeel";
-            break;
-            case "925":
-            this._namePhotographer = "Rhode";
-            break;
-            case "195":
-            this._namePhotographer = "Marcel";
-            break;
-            default:
-            break;
-        }
-        return this._namePhotographer
+    get image(){
+        
+        return this._image 
     }
 
-    
-    get image(){
-   
-        return `../../assets/photographers/${this.namePhotographer}/${this._image}` 
+    get video(){
+        
+        return this._video 
     }
 }

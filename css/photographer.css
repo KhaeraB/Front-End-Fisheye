@@ -1,5 +1,6 @@
 body{
     position: relative;
+  
 }
 
 
@@ -14,49 +15,76 @@ body{
     align-items: center;
     background-color: #FAFAFA;
     height: 300px;
-    margin: 0 100px;
     padding: 0 3%;
+    margin: 0 100px;
 }
+#gallery{
+    margin: 0 100px;
+}
+#gallery #filter{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-top: 1%;
+}
+#filter p{
+    margin-right: 3%;
+}
+#filter select, #filter option {
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    padding: 11px;
+    height: 70px;
+    border: none;
+    background-color: #901C1C;
+    cursor: pointer;
+}
+
 #images-gallery{
-    margin: 3% 100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
 }
 
-#images-gallery #cardImage{
-    width : 350px;
-    height: 300px;
+#images-gallery .cardImage{
+    margin: 1%;
 }
 
-#images-gallery #cardImage  .thumbnail{
-    width: 100%; 
-    height : auto; 
-    border-radius: 12px;
+#images-gallery .cardImage  .thumbnail{
+    width: 450px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 6px;  
 }
 
-#images-gallery #cardImage .description .likes{
+#images-gallery .cardImage .description .likes{
    display: flex;
    flex-direction: row;
    align-items: center;
    justify-content: flex-end;
 }
 
-#images-gallery #cardImage .description .likes p{
+#images-gallery .cardImage .description .likes p{
   font-size: 16px;
   font-weight: 800;
 }
 
- #images-gallery #cardImage .description .likes .fa-heart{
+ #images-gallery .cardImage .description .likes .fa-heart{
     font-size: 18px;
     color: #901C1C;
     margin-left: 20%;
 
 }
-#images-gallery #cardImage .description{
+#images-gallery .cardImage .description{
    display: flex;
    flex-direction: row;
    justify-content: space-between;
    align-items: center;
 }
-#images-gallery  #cardImage .description .title{
+#images-gallery  .cardImage .description .title{
     color: #901C1C;
     font-size: 24px;
     margin: 0;
@@ -80,8 +108,11 @@ body{
     height: 70px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
+}
+.banner_info p{
+    padding-right: 20%;
 }
 #likes_price .banner_info, #like_price .banner_info_price{
     display: flex;
@@ -95,25 +126,7 @@ body{
 }
 
 
-#filter{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    margin: 1% 100px;
-}
-#filter p{
-    margin-right: 3%;
-}
-#filter select, #filter option {
-    font-size: 12px;
-    font-weight: bold;
-    color: white;
-    padding: 11px;
-    height: 70px;
-    border: none;
-    background-color: #901C1C;
-    cursor: pointer;
-}
+
 .photograph-info{
     line-height: 1em;
 }
