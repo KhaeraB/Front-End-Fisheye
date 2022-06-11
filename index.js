@@ -1,5 +1,5 @@
 import PhotographerFactory from '/scripts/factories/photographer.js';
-//import ProfilFactory from '/scripts/factories/profilPhotographer.js';
+import ProfilFactory from '/scripts/factories/profilPhotographer.js';
 
 
 import GetHomePhotographers from '/scripts/models/home.js'; 

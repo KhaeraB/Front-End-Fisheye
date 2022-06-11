@@ -6,17 +6,16 @@ export default class GetLikes{
          
     UserTotalLikes() {
         const likes = 
-            `
-            <div class="banner_info">
+            ` <div class="banner_info">
             <p>${this.likeTotal}</p>
             <i class="fa fa-heart" aria-hidden="true"></i>
             </div>
             <div class="banner_info_price">
-            <p></p>
+                <p></p>
             </div>
             `
             this.$likesElement.innerHTML = likes;  
-            return this.$likesElement;  
+            return  
     } 
     
 }

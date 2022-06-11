@@ -10,9 +10,10 @@ export default class GetVideoGallery {
           /* type du media */
         
         const video = `
-            <video  class="thumbnail" height="240"  >
+            <video  class="thumbnail" height="240" >
                 <source src="../../assets/photographers/media/${this._media.video}" type="video/mp4">
             </video>
+            
            `; 
 
         const description = `

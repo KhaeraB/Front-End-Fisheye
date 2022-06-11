@@ -4,7 +4,7 @@ import PhotographersHomeCard from "./templates/PhotographersHomeCard.js"
 
 export default class Home {
     constructor() {
-        this.$usersWrapper = document.querySelector('#main #photographer_section')
+        this.$usersWrapper = document.getElementById('photographer_section')
     
         this.photographersApi = new AllPhotographers('../data/fisheye-data.json')
     }
@@ -12,16 +12,12 @@ export default class Home {
     async displayPhotographers() {
         const photographersData = await this.photographersApi.getPhotographers()
         const onlyPhotographers = photographersData
-        const UsersPhotographers = onlyPhotographers.map(photographers => new PhotographerFactory(photographers))
+        //const UsersPhotographers = onlyPhotographers.map(photographers => new PhotographerFactory(photographers))
        
+        const Template = new PhotographersHomeCard(onlyPhotographers);
+       // console.log(onlyPhotographers)
 
-        UsersPhotographers.forEach(photographer => {
-            const Template = new PhotographersHomeCard(photographer)
-               
-            this.$usersWrapper.appendChild(
-                Template.createUserCard()
-            )
-        })
+       this.$usersWrapper.innerHTML =  Template.createUserCard()
     }
     
 }

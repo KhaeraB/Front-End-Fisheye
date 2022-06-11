@@ -33,8 +33,9 @@ export default class HeaderSinglePage {
                 this.$userInfoProfil.append(
                     ProfilTemplate.createUserInfoCard()
                 )
-
-               
+                /*this.$priceEl.append(
+                    `${user.photographerPrice} € / jour`
+                );*/
             }
         })
     }
@@ -72,24 +73,17 @@ export default class HeaderSinglePage {
             .map((mediasingle) => {
                 new ProfilFactory(mediasingle, this.idUrl);
             });
-           
         likesData.forEach((like) => {
-
             if (like.photographerId == this.idUrl) {
                 likeTotal = likeTotal + like.likes;
                  
             }
-            
         })
         let LikeTemplate = new GetLikes(likeTotal, this.idUrl);
-        
-
         this.$likesElement.append(
             LikeTemplate.UserTotalLikes()
         );
-       
-        
-    }
+    } 
 
 }
 

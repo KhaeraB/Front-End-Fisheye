@@ -5,7 +5,7 @@ export default class HeaderContentProfil{
         this.$avatarElement = document.querySelector('#main .photograph-avatar')
     }
     
-    async createUserInfoCard() {
+    createUserInfoCard() {
          // Ajout l'avatar du photograph-info  */
         const infoPhotographer = 
             `<h1 class="photographer_name">${this._photographers.name}</h1>
@@ -21,6 +21,6 @@ export default class HeaderContentProfil{
 
         this.$infosElement.innerHTML = infoPhotographer
         this.$avatarElement.innerHTML = avatar
-        
+        return ; 
     }   
 }

@@ -37,7 +37,7 @@ export default class GetHomePhotographers {
     }
 
     get portrait(){
-        return `../../assets/photographers/photographerId/${this._portrait}` 
+        return this._portrait;  
     }
 }
 

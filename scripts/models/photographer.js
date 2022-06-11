@@ -64,11 +64,11 @@ export default class GetSinglePage{
 
     get image(){
         
-        return this._image 
+        return this._image; 
     }
 
     get video(){
         
-        return this._video 
+        return this._video; 
     }
 }
