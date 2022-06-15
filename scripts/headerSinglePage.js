@@ -2,7 +2,6 @@ import AllPhotographers from "./api/Api.js";
 
 import ProfilFactory from "./factories/profilPhotographer.js";
 
-import HeaderContentProfil from "./templates/SinglePageContent.js";
 import GetPhotoGallery from "./templates/GetPhotoGallery.js";
 import GetVideoGallery from "./templates/GetVideoGallery.js";
 
@@ -10,11 +9,10 @@ import GetLikes from "./templates/Getlikes.js";
 
 export default class HeaderSinglePage {
     constructor() {
-        this.$userInfoProfil = document.querySelectorAll(
-            "#main #photograph-header"
-        );
+        this.$userInfoProfil = document.getElementById("photograph-header");
         this.$userImagesProfil = document.getElementById("images-gallery");
         this.$likesElement = document.querySelectorAll("#likes_price");
+        
         this.$priceEl = document.querySelector("#likes_price .banner_info_price p");
         this.mediasApi = new AllPhotographers("../data/fisheye-data.json");
 
@@ -24,21 +22,27 @@ export default class HeaderSinglePage {
     async displayCardPhotographers() {
         const photographersData = await this.mediasApi.getPhotographers()
         const data = photographersData
-        const InfoPhotographers = data.map(medias => new ProfilFactory(medias))
-
-        InfoPhotographers.forEach(user => {
-            if (this.idUrl == user.id) {
-                const ProfilTemplate = new HeaderContentProfil(user, this.idUrl);
-                
-                this.$userInfoProfil.append(
-                    ProfilTemplate.createUserInfoCard()
-                )
-                /*this.$priceEl.append(
-                    `${user.photographerPrice} € / jour`
-                );*/
+        data.map((info) => {
+        
+            if(info.id == this.idUrl){
+                this.$userInfoProfil.innerHTML = 
+                `<div class="photograph-info">
+                    <h1 class="photographer_name">${info.name}</h1>
+                    <h2 class="photographer_city">${info.city}, ${info.country}</h2>
+                    <p class="photographer_tagline">${info.tagline}</p>
+                </div>
+                <button class="contact_button" onclick="displayModal()">
+                    Contactez-moi
+                </button>
+                <div class="photograph-avatar">
+                    <img src="../../assets/photographers/photographerId/${info.portrait}" alt="photo de ${info.name}">
+                </div>`
             }
         })
+       
+    
     }
+
     async displayImagesPhotographers() {
         const galleryPhotographers = await this.mediasApi.getPhotos();
         const imagesData = galleryPhotographers;

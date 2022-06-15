@@ -1,13 +1,10 @@
 export default class PhotographersHomeCard{
     constructor(photographers) {
         this._photographers = photographers
-      
-       // this.$thumbnail = document.createElement('article')
     }
     
     createUserCard() {
-        console.log(this._photographers)
-        const html = this._photographers.map(photographer => 
+        const homeThumbnail = this._photographers.map(photographer => 
            
             `<article> 
             <a href="../photographer.html?id=${photographer.id}" id="link" title="${photographer.name}" >
@@ -25,7 +22,8 @@ export default class PhotographersHomeCard{
             ) 
  
         
-        return html.join('')
+            return  homeThumbnail.join('')
+        
 
     }
 
