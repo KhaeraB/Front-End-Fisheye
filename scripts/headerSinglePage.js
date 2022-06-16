@@ -5,15 +5,13 @@ import ProfilFactory from "./factories/profilPhotographer.js";
 import GetPhotoGallery from "./templates/GetPhotoGallery.js";
 import GetVideoGallery from "./templates/GetVideoGallery.js";
 
-import GetLikes from "./templates/Getlikes.js";
-
 export default class HeaderSinglePage {
     constructor() {
         this.$userInfoProfil = document.getElementById("photograph-header");
         this.$userImagesProfil = document.getElementById("images-gallery");
-        this.$likesElement = document.querySelectorAll("#likes_price");
+        this.$likesElement = document.getElementById("likes_price");
         
-        this.$priceEl = document.querySelector("#likes_price .banner_info_price p");
+        this.$priceEl = document.querySelectorAll("#like_price ");
         this.mediasApi = new AllPhotographers("../data/fisheye-data.json");
 
         this.idUrl = new URL(window.location.href).searchParams.get("id");
@@ -23,7 +21,6 @@ export default class HeaderSinglePage {
         const photographersData = await this.mediasApi.getPhotographers()
         const data = photographersData
         data.map((info) => {
-        
             if(info.id == this.idUrl){
                 this.$userInfoProfil.innerHTML = 
                 `<div class="photograph-info">
@@ -37,10 +34,10 @@ export default class HeaderSinglePage {
                 <div class="photograph-avatar">
                     <img src="../../assets/photographers/photographerId/${info.portrait}" alt="photo de ${info.name}">
                 </div>`
+                
+                
             }
         })
-       
-    
     }
 
     async displayImagesPhotographers() {
@@ -71,23 +68,42 @@ export default class HeaderSinglePage {
     async displayLikes() {
         const likesPhotographers = await this.mediasApi.getLikes();
         const likesData = likesPhotographers;
+        const pricePhotographers = await this.mediasApi.getPhotographers();
+        const priceData = pricePhotographers;
+
         let likeTotal = 0
+        let contentLike = ""
+        let contentPrice = ""
+
         likesData
-            .filter((media) => media.photographerId === parseInt(this.idUrl))
-            .map((mediasingle) => {
-                new ProfilFactory(mediasingle, this.idUrl);
-            });
-        likesData.forEach((like) => {
-            if (like.photographerId == this.idUrl) {
-                likeTotal = likeTotal + like.likes;
-                 
+        .filter((media) => media.photographerId === parseInt(this.idUrl))
+        .map((mediasingle) => {
+            if (mediasingle.photographerId == this.idUrl) {
+                likeTotal = likeTotal + mediasingle.likes;
+                contentLike  = 
+                `<div class="banner_info">
+                    <p>${likeTotal}</p>
+                    <i class="fa fa-heart" aria-hidden="true"></i>
+                </div>
+                `
             }
-        })
-        let LikeTemplate = new GetLikes(likeTotal, this.idUrl);
-        this.$likesElement.append(
-            LikeTemplate.UserTotalLikes()
-        );
+            
+        priceData
+        .map((price) => {
+            if (price.id == this.idUrl) {       
+                contentPrice = 
+                    `<div class="info_price">
+                    <p>${price.price} €/ jour</p>        
+                    </div>
+                    `
+                return this.$likesElement.innerHTML = contentLike + contentPrice    
+            }
+        });
+           
+    });   
+           
     } 
+
 
 }
 
