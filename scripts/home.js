@@ -1,20 +1,34 @@
 import AllPhotographers from "./api/Api.js"
-import PhotographersHomeCard from "./templates/PhotographersHomeCard.js"
 
 export default class Home {
     constructor() {
-        this.$usersWrapper = document.getElementById('photographer_section')
-    
+
         this.photographersApi = new AllPhotographers('../data/fisheye-data.json')
     }
 
     async displayPhotographers() {
         const photographersData = await this.photographersApi.getPhotographers()
         const onlyPhotographers = photographersData 
-        const Template = new PhotographersHomeCard(onlyPhotographers);
        // console.log(onlyPhotographers)
-        
-       this.$usersWrapper.innerHTML =  Template.createUserCard()
+        let $usersWrapper = document.getElementById('photographer_section')
+        $usersWrapper.innerHTML =  onlyPhotographers.map(photographer => 
+          
+           `<article> 
+               <a href="../photographer.html?id=${photographer.id}" id="link" title="${photographer.name}" >
+                   <img src="../../assets/photographers/photographerId/${photographer.portrait}" alt="photo de ${photographer.name}">
+                   <h2 alt= "${photographer.name}">${photographer.name}</h2>
+               </a>
+
+               <h4 alt= "${photographer.city}, ${photographer.country}">${photographer.city}, ${photographer.country}</h4>
+
+               <p>${photographer.tagline}</p>
+
+               <small>${photographer.price}€/jour</small>
+           </article>`
+           
+           ).join('')   
+
+       
     }
     
 }

@@ -55,12 +55,15 @@ export default class HeaderSinglePage {
                     this.$userImagesProfil.append(
                         MediaTemplate.createUserGalleries()
                     );
+                    
                 } else {
                     let MediaTemplate = new GetVideoGallery(photo, this.idUrl);
                     this.$userImagesProfil.append(
                         MediaTemplate.createUserGalleries()
                     );
                 }
+
+                
             }
         });
     }
@@ -100,15 +103,15 @@ export default class HeaderSinglePage {
             }
         });
            
-    });   
+        });   
            
     } 
-
-
 }
-
 
 const app = new HeaderSinglePage();
 app.displayCardPhotographers();
 app.displayImagesPhotographers();
 app.displayLikes();
+
+
+

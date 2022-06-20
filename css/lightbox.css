@@ -1,4 +1,5 @@
-.lightbox{
+#lightbox{
+    display: none;
     position:fixed; 
     top:0;
     left: 0;
@@ -60,15 +61,26 @@
     object-fit: cover;
     animation: lightboxIn .5s;
 }
-.lightbox__container{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 50px;
-    margin-right: 50px;
-    min-height: 100vh;
-}
 
+#lightbox__container{
+    position: absolute;
+    right: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 3%;
+    align-items: center;
+}
+#lightbox__title{
+    align-self: flex-start;
+    color : #901C1C;
+    font-size: 24px;
+}
+#content-lightbox{
+    height: 700px;
+    width: 850px;
+    border-radius: 5px;
+}
 @keyframes lightboxIn {
     from {opacity: 0;}
     to{ opacity: 1;}

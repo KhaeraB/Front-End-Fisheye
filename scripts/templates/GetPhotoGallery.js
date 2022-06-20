@@ -9,9 +9,7 @@ export default class GetPhotoGallery {
         this.galleryElement.setAttribute("class", "cardImage lightbox__container", );
     
         const image = `
-            <img class='thumbnail' src="../../assets/photographers/media/${this._media.image}" alt="${this._media.title}">`;
-        
-        const description = `
+            <img class='thumbnail src-content' src="../../assets/photographers/media/${this._media.image}" alt="${this._media.title}" onclick="openLightbox()">
             <div class="description">
                 <p class="title">${this._media.title}</p>
                 <div class="likes">
@@ -20,7 +18,7 @@ export default class GetPhotoGallery {
                 </div>
             </div>`; 
 
-            this.galleryElement.innerHTML = image + description;
+            this.galleryElement.innerHTML = image ;
             return this.galleryElement;        
     }
 }

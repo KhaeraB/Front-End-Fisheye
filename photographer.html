@@ -26,7 +26,15 @@
             <option value="title">Titre</option>
           </select>
         </div>
-        
+        <div id="lightbox">
+          <button class="lightbox__close" onclick="closeLightbox()">Fermer</button>
+          <button class="lightbox__prev">Précédent</button>
+          <button class="lightbox__next">Suivant</button>
+        <div id="lightbox__container">
+          <div id="lightbox__content"></div>
+          <p id="lightbox__title"> lkhkugk</p>
+        </div>
+      </div>
 
         <div id="images-gallery">
           
@@ -53,6 +61,6 @@
 		</div>
     <script type="module" src="index.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
-
+    <script  src="./scripts/utils/lightbox.js"></script>
   </body>
 </html>

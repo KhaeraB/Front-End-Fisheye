@@ -51,6 +51,7 @@ body{
 
 #images-gallery .cardImage{
     margin: 1%;
+    position: relative;
 }
 
 #images-gallery .cardImage  .thumbnail{
@@ -98,6 +99,23 @@ body{
 
 }
 
+#video-controls{
+    
+    position: absolute;
+    bottom:50%;
+    right: 40%;
+    width: 89px;
+    height: 70px;
+    
+} 
+#playpause{
+    border: none;
+    background: none;
+}
+#playpause i {
+    font-size: 6em;
+    color: white;
+}
 #likes_price{
     position: fixed;
     right: 70px;
