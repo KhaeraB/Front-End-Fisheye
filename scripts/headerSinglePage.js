@@ -2,8 +2,7 @@ import AllPhotographers from "./api/Api.js";
 
 import ProfilFactory from "./factories/profilPhotographer.js";
 
-import GetPhotoGallery from "./templates/GetPhotoGallery.js";
-import GetVideoGallery from "./templates/GetVideoGallery.js";
+import Lightbox from "./utils/Lightbox.js"
 
 export default class HeaderSinglePage {
     constructor() {
@@ -34,8 +33,6 @@ export default class HeaderSinglePage {
                 <div class="photograph-avatar">
                     <img src="../../assets/photographers/photographerId/${info.portrait}" alt="photo de ${info.name}">
                 </div>`
-                
-                
             }
         })
     }
@@ -43,6 +40,7 @@ export default class HeaderSinglePage {
     async displayImagesPhotographers() {
         const galleryPhotographers = await this.mediasApi.getPhotos();
         const imagesData = galleryPhotographers;
+        
         imagesData
             .filter((media) => media.photographerId === parseInt(this.idUrl))
             .map((mediasingle) => {
@@ -50,24 +48,61 @@ export default class HeaderSinglePage {
             });
         imagesData.forEach((photo) => {
             if (photo.photographerId == parseInt(this.idUrl)) {
-                if ("image" in photo) {
-                    let MediaTemplate = new GetPhotoGallery(photo, this.idUrl);
-                    this.$userImagesProfil.append(
-                        MediaTemplate.createUserGalleries()
-                    );
-                    
-                } else {
-                    let MediaTemplate = new GetVideoGallery(photo, this.idUrl);
-                    this.$userImagesProfil.append(
-                        MediaTemplate.createUserGalleries()
-                    );
-                }
-
                 
+                const galleryElement = document.createElement("article");
+                galleryElement.setAttribute('data-id', `${photo.id}`)
+                if ("image" in photo) {
+                  
+                    galleryElement.setAttribute("class", "cardImage" );
+                    
+                    const image = `
+                    <img class='thumbnail src-content' src="../../assets/photographers/media/${photo.image}" alt="${photo.title}" >
+                    <div class="description">
+                        <p class="title">${photo.title}</p>
+                        <div class="likes">
+                            <p>${photo.likes} </p>
+                            <i class="fa fa-heart" aria-hidden="true"></i>
+                        </div>
+                    </div>`; 
+        
+                    galleryElement.innerHTML = image ;
+              
+                } else {
+                   galleryElement.setAttribute("class", "cardImage ");
+                    const video = `
+                      <video  class="thumbnail" height="240" >
+                          <source class="src-content"  src="../../assets/photographers/media/${photo.video}" type="video/mp4" >
+                      </video>
+                      <div id="video-controls" class="controls" data-state="hidden">
+                          <button id="playpause" type="button" data-state="play"><i class="far fa-play-circle"></i></button>
+                    </div>
+                      <div class="description">
+                          <p class="title">${photo.title}</p>
+                          <div class="likes">
+                              <p>${photo.likes} </p>
+                              <i class="fa fa-heart" aria-hidden="true"></i>
+                          </div>
+                      </div>`; 
+                      galleryElement.innerHTML = video ;
+                            
+                }
+                this.$userImagesProfil.append(galleryElement)
             }
+          
         });
     }
-
+    async displayLightBox(){
+        const mediaList = await this.mediasApi.getPhotos();
+        let listMedia = mediaList.map(media => new ProfilFactory(media));
+        let lightbox = new Lightbox(listMedia)
+        
+        document.querySelectorAll("#images-gallery .cardImage").forEach(elDom => {
+            elDom.addEventListener("click", (e)=>{
+                lightbox.show(e.currentTarget.dataset.id)
+            })
+        })
+        
+    }
     async displayLikes() {
         const likesPhotographers = await this.mediasApi.getLikes();
         const likesData = likesPhotographers;
@@ -106,12 +141,15 @@ export default class HeaderSinglePage {
         });   
            
     } 
+    
 }
 
 const app = new HeaderSinglePage();
 app.displayCardPhotographers();
 app.displayImagesPhotographers();
+app.displayLightBox();
 app.displayLikes();
+
 
 
 

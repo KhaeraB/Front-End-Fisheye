@@ -1,4 +1,4 @@
-#lightbox{
+#modal-lightbox{
     display: none;
     position:fixed; 
     top:0;
@@ -9,9 +9,22 @@
     z-index: 15;
     overflow: auto;
     animation: lightboxIn .5s;
+    justify-content: center;
+    align-items: center;
+
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+#modal-lightbox::-webkit-scrollbar {
+    display: none;
+  }
+#modal-lightbox.show{
+    display: flex;
+      /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
 /* Vector */
-.lightbox__close{
+.content .lightbox__close{
     background: url('../assets/icons/close.svg') center center / 42px 42px no-repeat transparent;
     width: 42px;
     height: 42px;
@@ -23,8 +36,8 @@
     z-index: 20;
 }
 
-.lightbox__next, 
-.lightbox__prev{
+.content .lightbox__next, 
+.content .lightbox__prev{
     background: url('../assets/icons/arrow.svg') center center / 30px 48px no-repeat;
     width: 50px;
     height: 100%;
@@ -33,16 +46,10 @@
     top: 0;
     margin-top:-14px ;
     z-index: 11;
-    opacity: .5;
+    opacity: 1;
     text-indent: -3000px;
     transition: .3s;
     cursor: pointer;
-}
-
-.lightbox__next:hover, 
-.lightbox__prev:hover{
-    opacity: 1;
-
 }
 
 .lightbox__next{
@@ -50,37 +57,30 @@
     right: 50px;
     transform: rotate(180deg);
 }
+.lightbox__next.hide, .lightbox__prev.hide{
+    opacity: 0;
+}
 
-.lightbox__prev{
+.content .lightbox__prev{
     left: 50px;
 }
 
-.lightbox__container img, .lightbox__container video{
-    max-width: 1050px;
-    height: 900px;
+#lightbox__content .src-content, #lightbox__content video{
+    height: 700px;
+    width: 850px;
+    border-radius: 5px;
     object-fit: cover;
     animation: lightboxIn .5s;
+    margin-top: 4%;
 }
 
-#lightbox__container{
-    position: absolute;
-    right: 25%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 3%;
-    align-items: center;
-}
+
 #lightbox__title{
     align-self: flex-start;
     color : #901C1C;
     font-size: 24px;
 }
-#content-lightbox{
-    height: 700px;
-    width: 850px;
-    border-radius: 5px;
-}
+
 @keyframes lightboxIn {
     from {opacity: 0;}
     to{ opacity: 1;}
