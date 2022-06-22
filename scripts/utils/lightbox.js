@@ -25,7 +25,7 @@ export default class Lightbox{
 
     prev(e){
        
-        let index = this.listElement.findIndex(element => element.id == this.currentElement.id)
+        let index = this.listElement.findIndex(element => element.title == this.currentElement.title)
         if(index == 0){
             e.preventDefault()
             this.currentElement = this.listElement[this.listElement.length] 
@@ -38,7 +38,7 @@ export default class Lightbox{
     }
 
     next(e){
-        let index = this.listElement.findIndex(element => element.id == this.currentElement.id)
+        let index = this.listElement.findIndex(element => element.title == this.currentElement.title)
 
         if(index == this.listElement.length - 1){
             e.preventDefault()
@@ -111,8 +111,8 @@ export default class Lightbox{
     }
 
     
-    getElementById(id){
-        return this.listElement.find(element => element.id == id)
+    getElementById(title){
+        return this.listElement.find(element => element.title == title)
     }
 
   

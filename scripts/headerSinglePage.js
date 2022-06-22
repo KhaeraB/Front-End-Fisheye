@@ -50,7 +50,7 @@ export default class HeaderSinglePage {
             if (photo.photographerId == parseInt(this.idUrl)) {
                 
                 const galleryElement = document.createElement("article");
-                galleryElement.setAttribute('data-id', `${photo.id}`)
+                galleryElement.setAttribute('data-title', `${photo.title}`)
                 if ("image" in photo) {
                   
                     galleryElement.setAttribute("class", "cardImage" );
@@ -98,7 +98,8 @@ export default class HeaderSinglePage {
         
         document.querySelectorAll("#images-gallery .cardImage").forEach(elDom => {
             elDom.addEventListener("click", (e)=>{
-                lightbox.show(e.currentTarget.dataset.id)
+                lightbox.show(e.currentTarget.dataset.title)
+                console.log(dataset.title)
             })
         })
         
