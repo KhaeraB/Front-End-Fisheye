@@ -23,21 +23,17 @@
 
     </div>
     <section id="gallery">
-      <div id="filter">
-        <p>Trier par</p>
-        <select name="popularité" id="">
-          <option value="hidden">Popularité</option>
-          <option value="date">Date</option>
-          <option value="title">Titre</option>
-        </select>
-      </div>
+      <form class="filter-form" action="#" method="POST">
+      
+    </form>
+    
       
       <div id="images-gallery">
 
       </div>
       <div id="modal-lightbox">
         <div class="content">
-          <button class="lightbox__close" onclick="closeLightbox()">Fermer</button>
+          <button class="lightbox__close">Fermer</button>
           <button class="lightbox__prev">Précédent</button>
           <button class="lightbox__next">Suivant</button>
           <div id="lightbox__container">
@@ -57,7 +53,7 @@
         <h2>Contactez-moi</h2>
         <img src="assets/icons/close.svg" onclick="closeModal()" />
       </header>
-      <form>
+      <form id="'formContact">
         <div>
           <label>Prénom</label>
           <input />
@@ -68,7 +64,6 @@
   </div>
   <script type="module" src="index.js"></script>
   <script src="/scripts/utils/contactForm.js"></script>
-  <script type="module" src="./scripts/utils/lightbox.js"></script>
 </body>
 
 </html>

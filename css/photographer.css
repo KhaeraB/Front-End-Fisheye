@@ -27,19 +27,6 @@ body{
     justify-content: flex-start;
     margin-top: 1%;
 }
-#filter p{
-    margin-right: 3%;
-}
-#filter select, #filter option {
-    font-size: 12px;
-    font-weight: bold;
-    color: white;
-    padding: 11px;
-    height: 70px;
-    border: none;
-    background-color: #901C1C;
-    cursor: pointer;
-}
 
 #images-gallery{
     margin: 0 auto;
@@ -49,43 +36,43 @@ body{
     flex-wrap: wrap;
 }
 
-#images-gallery .cardImage{
+#images-gallery .cardMedia{
     margin: 1%;
     position: relative;
 }
 
-#images-gallery .cardImage  .thumbnail{
+#images-gallery .cardMedia  .thumbnail{
     width: 450px;
     height: 400px;
     object-fit: cover;
     border-radius: 6px;  
 }
 
-#images-gallery .cardImage .description .likes{
+#images-gallery .cardMedia .description .likes{
    display: flex;
    flex-direction: row;
    align-items: center;
    justify-content: flex-end;
 }
 
-#images-gallery .cardImage .description .likes p{
+#images-gallery .cardMedia .description .likes p{
   font-size: 16px;
   font-weight: 800;
 }
 
- #images-gallery .cardImage .description .likes .fa-heart{
+ #images-gallery .cardMedia .description .likes .fa-heart{
     font-size: 18px;
     color: #901C1C;
     margin-left: 20%;
 
 }
-#images-gallery .cardImage .description{
+#images-gallery .cardMedia .description{
    display: flex;
    flex-direction: row;
    justify-content: space-between;
    align-items: center;
 }
-#images-gallery  .cardImage .description .title{
+#images-gallery  .cardMedia .description .title{
     color: #901C1C;
     font-size: 24px;
     margin: 0;
@@ -200,19 +187,19 @@ body{
     text-align: center;
 }
 
-form {
+#formContact {
     display: flex;
     width: 100%;
     flex-direction: column;
     align-items: flex-start;
 }
 
-form label {
+#formContact label {
     color: #312E2E;
     font-size: 36px;
 }
 
-form div {
+#formContact div {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -220,7 +207,7 @@ form div {
     margin-bottom: 26px;
 }
 
-form input {
+#formContact input {
     width: 100%;
     height: 68px;
     border: none;

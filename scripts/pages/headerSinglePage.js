@@ -1,8 +1,10 @@
-import AllPhotographers from "./api/Api.js";
+import AllPhotographers from "../api/Api.js";
 
-import ProfilFactory from "./factories/profilPhotographer.js";
+import ProfilFactory from "../factories/ProfilFactory.js";
 
-import Lightbox from "./utils/Lightbox.js"
+import Lightbox from "../utils/Lightbox.js"; 
+
+import SortFilter from "../utils/Sort.js";
 
 export default class HeaderSinglePage {
     constructor() {
@@ -53,7 +55,7 @@ export default class HeaderSinglePage {
                 galleryElement.setAttribute('data-title', `${photo.title}`)
                 if ("image" in photo) {
                   
-                    galleryElement.setAttribute("class", "cardImage" );
+                    galleryElement.setAttribute("class", "cardMedia" );
                     
                     const image = `
                     <img class='thumbnail src-content' src="../../assets/photographers/media/${photo.image}" alt="${photo.title}" >
@@ -65,10 +67,10 @@ export default class HeaderSinglePage {
                         </div>
                     </div>`; 
         
-                    galleryElement.innerHTML = image ;
+                    galleryElement.innerHTML = image;
               
                 } else {
-                   galleryElement.setAttribute("class", "cardImage ");
+                   galleryElement.setAttribute("class", "cardMedia ");
                     const video = `
                       <video  class="thumbnail" height="240" >
                           <source class="src-content"  src="../../assets/photographers/media/${photo.video}" type="video/mp4" >
@@ -83,7 +85,7 @@ export default class HeaderSinglePage {
                               <i class="fa fa-heart" aria-hidden="true"></i>
                           </div>
                       </div>`; 
-                      galleryElement.innerHTML = video ;
+                      galleryElement.innerHTML = video;
                             
                 }
                 this.$userImagesProfil.append(galleryElement)
@@ -93,17 +95,29 @@ export default class HeaderSinglePage {
     }
     async displayLightBox(){
         const mediaList = await this.mediasApi.getPhotos();
-        let listMedia = mediaList.map(media => new ProfilFactory(media));
+        let listMedia = mediaList.map(media => new ProfilFactory(media))
+        .filter((media) => media.photographerId === parseInt(this.idUrl))
         let lightbox = new Lightbox(listMedia)
-        
-        document.querySelectorAll("#images-gallery .cardImage").forEach(elDom => {
-            elDom.addEventListener("click", (e)=>{
-                lightbox.show(e.currentTarget.dataset.title)
-                console.log(dataset.title)
+      
+            document.querySelectorAll("#images-gallery .cardMedia").forEach(elDom => {
+                elDom.addEventListener("click", (e)=>{
+                    lightbox.show(e.currentTarget.dataset.title);
+                })
             })
-        })
+        
         
     }
+
+    async displaySortFilter(){
+        const getDataSort = await this.mediasApi.getPhotos();
+        let sortData = getDataSort.map(info => new ProfilFactory(info));
+        let Filter = new SortFilter(sortData);
+        
+        Filter.render();
+        
+    }
+
+    
     async displayLikes() {
         const likesPhotographers = await this.mediasApi.getLikes();
         const likesData = likesPhotographers;
@@ -142,7 +156,8 @@ export default class HeaderSinglePage {
         });   
            
     } 
-    
+
+
 }
 
 const app = new HeaderSinglePage();
@@ -150,6 +165,8 @@ app.displayCardPhotographers();
 app.displayImagesPhotographers();
 app.displayLightBox();
 app.displayLikes();
+//app.displaySortFilter();
+
 
 
 
