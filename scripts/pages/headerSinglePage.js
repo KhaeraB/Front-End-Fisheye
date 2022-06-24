@@ -71,6 +71,7 @@ export default class HeaderSinglePage {
               
                 } else {
                    galleryElement.setAttribute("class", "cardMedia ");
+                   galleryElement.setAttribute('data-title', `${photo.title}`); 
                     const video = `
                       <video  class="thumbnail" height="240" >
                           <source class="src-content"  src="../../assets/photographers/media/${photo.video}" type="video/mp4" >

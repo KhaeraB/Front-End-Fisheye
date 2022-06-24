@@ -6,7 +6,7 @@ export default class Lightbox {
     /**
      * @param {string} url du media
      */
-    constructor(listElement, title, image, video) {
+    constructor(listElement) {
         this.currentElement = null
         this.listElement = listElement
 
@@ -18,18 +18,18 @@ export default class Lightbox {
         this.target = document.querySelector("#modal-lightbox")
 
     }
-    show(id) {
-        this.currentElement = this.getElementById(id)
-        this.target.focus()
+    show(title) {
+        this.currentElement = this.getTitle(title)
         this.display()
         disableBodyScroll(this.display)
+        
     }
 
     prev() {
+        console.log(this.currentElement)
         let index = this.listElement.findIndex(element => element.title == this.currentElement.title)
         if (index == 0) {
-            this.currentElement = this.listElement[this.listElement.length]
-
+            this.currentElement = this.listElement[this.listElement.length - 1]
         } else {
             this.currentElement = this.listElement[index - 1]
         }
@@ -38,10 +38,9 @@ export default class Lightbox {
     }
 
     next() {
-        let index = this.listElement.findIndex(element => element.id == this.currentElement.id)
+        let index = this.listElement.findIndex(element =>element.title == this.currentElement.title)
         if (index == this.listElement.length - 1) {
             this.currentElement = this.listElement[0]
-
         } else {
             this.currentElement = this.listElement[index + 1]
         }
@@ -90,7 +89,7 @@ export default class Lightbox {
     }
 
     display() {
-
+        console.log(this.currentElement.image)
         if (this.currentElement.image) {
             this.contentMedia.innerHTML = `
             <img class='src-content' src="../../assets/photographers/media/${this.currentElement.image}" alt="${this.currentElement.title}" >
@@ -108,7 +107,7 @@ export default class Lightbox {
     }
 
 
-    getElementById(title) {
+    getTitle(title) {
         return this.listElement.find(element => element.title == title)
     }
 
