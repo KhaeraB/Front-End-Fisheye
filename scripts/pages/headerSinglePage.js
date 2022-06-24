@@ -165,7 +165,7 @@ app.displayCardPhotographers();
 app.displayImagesPhotographers();
 app.displayLightBox();
 app.displayLikes();
-//app.displaySortFilter();
+app.displaySortFilter();
 
 
 

@@ -24,13 +24,7 @@ export default class SortFilter {
     }
  
     onChangeFilter() {
-        select = document.getElementById("filter-select");
-        choice = select.selectedIndex;
-        valeur = select.options[choice].value;
-        texte = select.options[choice].text;
-        document.getElementById('id_ville').value = valeur;
-        document.getElementById('ville').value = texte;
-           
+        select = document.getElementById("filter-select");     
     }
   
     clearWrapper() {
