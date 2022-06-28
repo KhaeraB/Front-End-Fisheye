@@ -1,21 +1,21 @@
-import AllPhotographers from "../api/Api.js";
+import AllPhotographers from "../api/Api.js"
 
-import ProfilFactory from "../factories/ProfilFactory.js";
+import ProfilFactory from "../factories/ProfilFactory.js"
 
-import Lightbox from "../utils/Lightbox.js"; 
+import Lightbox from "../utils/Lightbox.js" 
 
-import SortFilter from "../utils/Sort.js";
+import SortFilter from "../utils/Sort.js"
 
 export default class HeaderSinglePage {
     constructor() {
-        this.$userInfoProfil = document.getElementById("photograph-header");
-        this.$userImagesProfil = document.getElementById("images-gallery");
-        this.$likesElement = document.getElementById("likes_price");
+        this.$userInfoProfil = document.getElementById("photograph-header")
+        this.$userImagesProfil = document.getElementById("images-gallery")
+        this.$likesElement = document.getElementById("likes_price")
         
-        this.$priceEl = document.querySelectorAll("#like_price ");
-        this.mediasApi = new AllPhotographers("../data/fisheye-data.json");
+        this.$priceEl = document.querySelectorAll("#like_price ")
+        this.mediasApi = new AllPhotographers("../data/fisheye-data.json")
 
-        this.idUrl = new URL(window.location.href).searchParams.get("id");
+        this.idUrl = new URL(window.location.href).searchParams.get("id")
 
     }
     async displayCardPhotographers() {
@@ -40,40 +40,40 @@ export default class HeaderSinglePage {
     }
 
     async displayImagesPhotographers() {
-        const galleryPhotographers = await this.mediasApi.getPhotos();
-        const imagesData = galleryPhotographers;
+        const galleryPhotographers = await this.mediasApi.getPhotos()
+        const imagesData = galleryPhotographers
         
         imagesData
             .filter((media) => media.photographerId === parseInt(this.idUrl))
             .map((mediasingle) => {
-                new ProfilFactory(mediasingle, this.idUrl);
-            });
+                new ProfilFactory(mediasingle, this.idUrl)
+            })
         imagesData.forEach((photo) => {
             if (photo.photographerId == parseInt(this.idUrl)) {
                 
-                const galleryElement = document.createElement("article");
+                const galleryElement = document.createElement("article")
                 galleryElement.setAttribute('data-title', `${photo.title}`)
                 if ("image" in photo) {
                   
-                    galleryElement.setAttribute("class", "cardMedia" );
+                    galleryElement.setAttribute("class", "cardMedia" )
                     
                     const image = `
-                    <img class='thumbnail src-content' src="../../assets/photographers/media/${photo.image}" alt="${photo.title}" >
+                    <img class='thumbnail src-content' data-title="${photo.title}" src="../../assets/photographers/media/${photo.image}" alt="${photo.title}" >
                     <div class="description">
                         <p class="title">${photo.title}</p>
-                        <div class="likes">
+                        <div id="likes-${photo.id}" class="rent">
                             <p>${photo.likes} </p>
-                            <i class="fa fa-heart" aria-hidden="true"></i>
+                            <i class="fa fa-heart " aria-hidden="true"></i>
                         </div>
-                    </div>`; 
+                    </div>` 
         
-                    galleryElement.innerHTML = image;
+                    galleryElement.innerHTML = image
               
                 } else {
-                   galleryElement.setAttribute("class", "cardMedia ");
-                   galleryElement.setAttribute('data-title', `${photo.title}`); 
+                   galleryElement.setAttribute("class", "cardMedia ")
+                   galleryElement.setAttribute('data-title', `${photo.title}`) 
                     const video = `
-                      <video  class="thumbnail" height="240" >
+                      <video  class="thumbnail" data-title="${photo.title}" height="240" >
                           <source class="src-content"  src="../../assets/photographers/media/${photo.video}" type="video/mp4" >
                       </video>
                       <div id="video-controls" class="controls" data-state="hidden">
@@ -81,28 +81,28 @@ export default class HeaderSinglePage {
                     </div>
                       <div class="description">
                           <p class="title">${photo.title}</p>
-                          <div class="likes">
+                          <div id="likes-${photo.id}" class="rent">
                               <p>${photo.likes} </p>
-                              <i class="fa fa-heart" aria-hidden="true"></i>
+                              <i class="fa fa-heart " aria-hidden="true"></i>
                           </div>
-                      </div>`; 
-                      galleryElement.innerHTML = video;
+                      </div>` 
+                      galleryElement.innerHTML = video
                             
                 }
                 this.$userImagesProfil.append(galleryElement)
             }
           
-        });
+        })
     }
     async displayLightBox(){
-        const mediaList = await this.mediasApi.getPhotos();
+        const mediaList = await this.mediasApi.getPhotos()
         let listMedia = mediaList.map(media => new ProfilFactory(media))
         .filter((media) => media.photographerId === parseInt(this.idUrl))
         let lightbox = new Lightbox(listMedia)
       
-            document.querySelectorAll("#images-gallery .cardMedia").forEach(elDom => {
+            document.querySelectorAll("#images-gallery .cardMedia .thumbnail").forEach(elDom => {
                 elDom.addEventListener("click", (e)=>{
-                    lightbox.show(e.currentTarget.dataset.title);
+                    lightbox.show(e.currentTarget.dataset.title)
                 })
             })
         
@@ -110,21 +110,24 @@ export default class HeaderSinglePage {
     }
 
     async displaySortFilter(){
-        const getDataSort = await this.mediasApi.getPhotos();
-        let sortData = getDataSort.map(info => new ProfilFactory(info));
-        let Filter = new SortFilter(sortData);
-        
-        Filter.render();
-        
+        const getDataSort = await this.mediasApi.getPhotos()
+        let sortData = getDataSort.map(info => new ProfilFactory(info))
+        .filter((media) => media.photographerId === parseInt(this.idUrl))
+
+        let filter = new SortFilter(sortData)
+        document.querySelectorAll("#sortBy select option").forEach(elDom => {
+            elDom.addEventListener("click", (e)=>{
+                filter.sortBy(e)
+            })
+        })
     }
 
     
     async displayLikes() {
-        const likesPhotographers = await this.mediasApi.getLikes();
-        const likesData = likesPhotographers;
-        const pricePhotographers = await this.mediasApi.getPhotographers();
-        const priceData = pricePhotographers;
-
+        const likesPhotographers = await this.mediasApi.getLikes()
+        const likesData = likesPhotographers
+        const pricePhotographers = await this.mediasApi.getPhotographers()
+        const priceData = pricePhotographers
         let likeTotal = 0
         let contentLike = ""
         let contentPrice = ""
@@ -132,16 +135,33 @@ export default class HeaderSinglePage {
         likesData
         .filter((media) => media.photographerId === parseInt(this.idUrl))
         .map((mediasingle) => {
-            if (mediasingle.photographerId == this.idUrl) {
-                likeTotal = likeTotal + mediasingle.likes;
-                contentLike  = 
-                `<div class="banner_info">
+         likeTotal = likeTotal + mediasingle.likes
+            //console.log(mediasingle.likes)
+           
+            contentLike  =  
+            `<div class="banner_info">
                     <p>${likeTotal}</p>
                     <i class="fa fa-heart" aria-hidden="true"></i>
                 </div>
                 `
-            }
-            
+
+           //console.log(document.querySelector('.banner_info p')) 
+               
+           document.querySelector("#likes-"+ mediasingle.id).addEventListener("click", () => {
+            let infoBanner = document.querySelector('.banner_info p')
+                    if(!document.querySelector("#likes-"+mediasingle.id+ " .fa-heart").classList.contains("liked")){
+                        console.log(likeTotal++)
+                        document.querySelector("#likes-"+mediasingle.id+ " .fa-heart").classList.add('liked')
+                        infoBanner.innerHTML++
+                        document.querySelector("#likes-"+mediasingle.id+ " p").innerHTML++
+                    } else{
+                        console.log(likeTotal--)
+                        document.querySelector("#likes-"+mediasingle.id+ " .fa-heart").classList.remove('liked')
+                        infoBanner.innerHTML--
+                        document.querySelector("#likes-"+mediasingle.id+ " p").innerHTML--
+                    }
+                })
+            })   
         priceData
         .map((price) => {
             if (price.id == this.idUrl) {       
@@ -149,24 +169,24 @@ export default class HeaderSinglePage {
                     `<div class="info_price">
                     <p>${price.price} €/ jour</p>        
                     </div>
-                    `
-                return this.$likesElement.innerHTML = contentLike + contentPrice    
+                    `  
             }
-        });
-           
-        });   
-           
+
+        }) 
+        //console.log(document.querySelector("#likes .fa-heart").classList.contains("liked"))
+       
+        this.$likesElement.innerHTML = contentLike + contentPrice  
     } 
 
 
 }
 
-const app = new HeaderSinglePage();
-app.displayCardPhotographers();
-app.displayImagesPhotographers();
-app.displayLightBox();
-app.displayLikes();
-app.displaySortFilter();
+const app = new HeaderSinglePage()
+app.displayCardPhotographers()
+app.displayImagesPhotographers()
+app.displayLightBox()
+app.displayLikes()
+app.displaySortFilter()
 
 
 

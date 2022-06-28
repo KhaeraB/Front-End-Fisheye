@@ -23,11 +23,15 @@
 
     </div>
     <section id="gallery">
-      <form class="filter-form" action="#" method="POST">
-      
-    </form>
-    
-      
+      <div class="sortBy">
+        <div class="titleSort">Trier par : </div>
+        <select name="sortFilter" id="sort-page">
+            <option class="option" disabled selected hidden>Selectionner</option>
+            <option class="option" value="likes">Popularite</option>
+            <option class="option" value="date">Date</option>
+            <option class="option" value="title">Titre</option>
+        </select>
+      </div>
       <div id="images-gallery">
 
       </div>
@@ -64,6 +68,7 @@
   </div>
   <script type="module" src="index.js"></script>
   <script src="/scripts/utils/contactForm.js"></script>
+  
 </body>
 
 </html>

@@ -1,46 +1,37 @@
-.filter-form{
+/* Selection Tri Par */
+.sortBy
+{
     display: flex;
-    width: 100%;
-    flex-direction: row;
-    align-content: center;
-    margin-top: 2%;
-   
+    align-items: center;
 }
-.filter-form label{
-    margin-right: 2%;
-    align-self: center;
-    font-weight: bolder;
+.titleSort
+{
+    font-size: 18px;
+    font-weight: 700;
+    margin-right: 2em;
 }
-.select-items div,.select-selected {
-    color: #ffffff;
-    padding: 8px 16px;
-    border: 1px solid transparent;
-    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
-    cursor: pointer;
-    user-select: none;
-  }
-.filter-form #filter-select {
+select
+{
+    width: 200px;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    background: url("../assets/icons/arrow-select-init.svg") #901C1C no-repeat 90% !important; /* !important used for overriding all other customisations */
-    border:none;
+    background: url("../assets/icons/arrow-select-init.svg") #901C1C no-repeat 90% ; 
     color: white;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 20px;
     border-radius: 5px;
-    height: 69px;
-    width: 170px;
-    padding: 1%;
     cursor: pointer;
 }
-
-.filter-form #filter-select:active {
-    background: url("../assets/icons/arrow-select-down.svg") #901C1C no-repeat 90% !important; /* !important used for overriding all other customisations */
+select:hover
+{
+    cursor: pointer;
 }
-.filter-hide {
-    display: none;
-  }
-
-
-  
+select:focus, select:active
+{
+    border: none;
+    outline: none;
+}
 
 

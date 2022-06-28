@@ -22,6 +22,7 @@
       /* Hide scrollbar for IE, Edge and Firefox */
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
+    animation: lightboxIn .5s;
 }
 /* Vector */
 .content .lightbox__close{
@@ -34,6 +35,7 @@
     top: 50px;
     right: 50px;
     z-index: 20;
+    animation: lightboxIn .5s;
 }
 
 .content .lightbox__next, 

@@ -14,7 +14,6 @@ export default class Lightbox {
         this.contentMedia = document.querySelector("#modal-lightbox .content #lightbox__container #lightbox__content")
         this.manageElement()
         this.idUrl = new URL(window.location.href).searchParams.get("id");
-        this.onKeyUp = this.onKeyUp.bind(this);
         this.target = document.querySelector("#modal-lightbox")
 
     }
@@ -26,7 +25,6 @@ export default class Lightbox {
     }
 
     prev() {
-        console.log(this.currentElement)
         let index = this.listElement.findIndex(element => element.title == this.currentElement.title)
         if (index == 0) {
             this.currentElement = this.listElement[this.listElement.length - 1]
@@ -50,26 +48,11 @@ export default class Lightbox {
 
     close() {
         this.target.classList.remove("show")
-        document.body.classList.remove('no-scroll')
-        document.removeEventListener('keydown', this.onKeyUp)
         enableBodyScroll(this.display)
     }
-    /**
-     * les entrés clavier sur la lightbox
-     * @param {KeybordEvent} e 
-     */
+    
 
-    onKeyUp(e) {
-        if (e.key == 'Escape') {
-            this.close(e)
-        } else if (e.key == 'Enter') {
-            this.show(e)
-        } else if (e.key == 'ArrowLeft') {
-            this.prev(e)
-        } else if (e.key == 'ArrowRight') {
-            this.next(e)
-        }
-    }
+    
 
     manageElement() {
         document.querySelector("#modal-lightbox .content .lightbox__next").addEventListener('click', () => {
@@ -84,20 +67,36 @@ export default class Lightbox {
                 this.close()
             }
         })
-        document.addEventListener('keydown', this.onKeyUp)
+        /**
+         * les entrés clavier sur la lightbox
+         * @param {KeybordEvent} e 
+         */
+        document.addEventListener('keyup', (el) =>{
+                switch(el.key){
+                   
+                    case "ArrowLeft" :
+                        this.prev(); 
+                        break; 
+                    case "ArrowRight": 
+                        this.next();
+                        break; 
+                    case "Escape" : 
+                        this.close(); 
+                        break; 
+                }
+        })
 
     }
 
     display() {
-        console.log(this.currentElement.image)
         if (this.currentElement.image) {
             this.contentMedia.innerHTML = `
-            <img class='src-content' src="../../assets/photographers/media/${this.currentElement.image}" alt="${this.currentElement.title}" >
+            <img class='src-content' data-title="${this.currentElement.title}" src="../../assets/photographers/media/${this.currentElement.image}" alt="${this.currentElement.title}" >
             <p id="lightbox__title"> ${this.currentElement.title}</p>`
             this.target.classList.add("show")
         } else {
             this.contentMedia.innerHTML = this.contentMedia.innerHTML = ` 
-            <video  title="${this.currentElement.title}" controls  >
+            <video  title="${this.currentElement.title}" data-title="${this.currentElement.title}" controls  >
                 <source class="src-content"  src="../../assets/photographers/media/${this.currentElement.video}" type="video/mp4" >
             </video> 
             <p id="lightbox__title"> ${this.currentElement.title}</p>`

@@ -48,24 +48,29 @@ body{
     border-radius: 6px;  
 }
 
-#images-gallery .cardMedia .description .likes{
+#images-gallery .cardMedia .description .rent{
    display: flex;
    flex-direction: row;
    align-items: center;
    justify-content: flex-end;
 }
 
-#images-gallery .cardMedia .description .likes p{
+
+#images-gallery .cardMedia .description .rent p{
   font-size: 16px;
   font-weight: 800;
 }
 
- #images-gallery .cardMedia .description .likes .fa-heart{
+ #images-gallery .cardMedia .description .rent .fa-heart{
     font-size: 18px;
     color: #901C1C;
+    opacity: 0.5;
     margin-left: 20%;
 
 }
+#images-gallery .cardMedia .description .rent .fa-heart.liked{
+    opacity : 1; 
+ }
 #images-gallery .cardMedia .description{
    display: flex;
    flex-direction: row;
