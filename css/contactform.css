@@ -1,0 +1,136 @@
+#contact_modal {
+    display: none;
+}
+
+#contact_modal.displayForm{
+    display: flex;
+    position: absolute;
+    left:0;
+    top: 0;
+    border-radius: 0px;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100vw;
+    height: 100vh;
+    z-index: 15;
+    background-color: rgba(255, 255, 255, .90);
+}
+
+#contact_button {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    padding: 11px;
+    width: 170px;
+    height: 70px;
+    border: none;
+    background-color: #901C1C;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal {
+    height: auto;
+    width: 30vw;
+    border-radius: 5px;
+    background-color: #DB8876;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 35px;
+    margin: auto;
+}
+
+.modal header {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    position: relative;
+   
+}
+
+.modal header #close {
+    background: url('../assets/icons/close-white.svg') no-repeat;
+    border: none;
+    z-index: 11;
+    opacity: 1;
+    text-indent: -3000px;
+    cursor: pointer;
+    position: absolute;
+    top: 0;    
+    left: 92%;
+    color: white;
+    width: 100%;
+    height: 100%;
+   
+}
+
+.modal header h2, .modal header h3 {
+    font-size: 64px;
+    font-weight: normal;
+    text-align: center;
+    margin: 0;
+}
+
+#form-modal {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 12%;
+}
+
+#form-modal label {
+    color: #312E2E;
+    font-size: 20px;
+}
+
+#form-modal div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: self-start;
+    margin-bottom: 26px;
+}
+
+#form-modal input {
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+}
+#form-modal textarea {
+    width: 100%;
+    height: 70px;
+    border: none;
+    border-radius: 5px;
+}
+#form-modal .submit {
+    width: 30%;
+    height: 70px;
+    border: none;
+    border-radius: 5px;
+    background-color: #901C1C;
+    color: white;
+    font-size: 18px;
+}
+
+.formData[data-error]::after {
+    content: attr(data-error);
+    font-size: 12px;
+    color: #fff;
+    display: block;
+    margin-top: 7px;
+    margin-bottom: 7px;
+    text-align: left;
+    line-height: 0.3;
+    opacity: 0;
+    transition: 0.3s;
+  }
+  .formData[data-error-visible="true"]::after {
+    opacity: 1;
+  }
+  .formData[data-error-visible="true"] .text-control {
+    border: 2px solid #fff;
+  }

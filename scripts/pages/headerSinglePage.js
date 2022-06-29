@@ -4,7 +4,8 @@ import ProfilFactory from "../factories/ProfilFactory.js"
 
 import Lightbox from "../utils/Lightbox.js" 
 
-import SortFilter from "../utils/Sort.js"
+//import SortFilter from "../utils/Sort.js"
+import ContactForm from "../utils/contactForm.js"
 
 export default class HeaderSinglePage {
     constructor() {
@@ -29,7 +30,7 @@ export default class HeaderSinglePage {
                     <h2 class="photographer_city">${info.city}, ${info.country}</h2>
                     <p class="photographer_tagline">${info.tagline}</p>
                 </div>
-                <button class="contact_button" onclick="displayModal()">
+                <button id="contact_button"  aria-label="Contact Me">
                     Contactez-moi
                 </button>
                 <div class="photograph-avatar">
@@ -53,17 +54,18 @@ export default class HeaderSinglePage {
                 
                 const galleryElement = document.createElement("article")
                 galleryElement.setAttribute('data-title', `${photo.title}`)
+                galleryElement.setAttribute("aria-label", "Liliac Breasted roller, closeup view")
                 if ("image" in photo) {
                   
                     galleryElement.setAttribute("class", "cardMedia" )
-                    
+                   
                     const image = `
                     <img class='thumbnail src-content' data-title="${photo.title}" src="../../assets/photographers/media/${photo.image}" alt="${photo.title}" >
                     <div class="description">
                         <p class="title">${photo.title}</p>
                         <div id="likes-${photo.id}" class="rent">
                             <p>${photo.likes} </p>
-                            <i class="fa fa-heart " aria-hidden="true"></i>
+                            <i class="fa fa-heart " aria-hidden="true" aria-label="likes"></i>
                         </div>
                     </div>` 
         
@@ -83,7 +85,7 @@ export default class HeaderSinglePage {
                           <p class="title">${photo.title}</p>
                           <div id="likes-${photo.id}" class="rent">
                               <p>${photo.likes} </p>
-                              <i class="fa fa-heart " aria-hidden="true"></i>
+                              <i class="fa fa-heart " aria-hidden="true" aria-label="likes"></i>
                           </div>
                       </div>` 
                       galleryElement.innerHTML = video
@@ -94,32 +96,33 @@ export default class HeaderSinglePage {
           
         })
     }
+    /**
+     * @param {string} string media of data
+     */
     async displayLightBox(){
+        // init data of lightbox
         const mediaList = await this.mediasApi.getPhotos()
         let listMedia = mediaList.map(media => new ProfilFactory(media))
         .filter((media) => media.photographerId === parseInt(this.idUrl))
+        // link with lightbox file
         let lightbox = new Lightbox(listMedia)
       
             document.querySelectorAll("#images-gallery .cardMedia .thumbnail").forEach(elDom => {
                 elDom.addEventListener("click", (e)=>{
                     lightbox.show(e.currentTarget.dataset.title)
                 })
-            })
-        
-        
+            })  
     }
 
     async displaySortFilter(){
+        // init data of photographer profil  
         const getDataSort = await this.mediasApi.getPhotos()
         let sortData = getDataSort.map(info => new ProfilFactory(info))
         .filter((media) => media.photographerId === parseInt(this.idUrl))
-
+        let mediasSorteds = []
+        // link with sort filter
         let filter = new SortFilter(sortData)
-        document.querySelectorAll("#sortBy select option").forEach(elDom => {
-            elDom.addEventListener("click", (e)=>{
-                filter.sortBy(e)
-            })
-        })
+        document.querySelectorAll("#sortBy").forEach( (elt)=>{ elt.remove() } )
     }
 
     
@@ -131,12 +134,12 @@ export default class HeaderSinglePage {
         let likeTotal = 0
         let contentLike = ""
         let contentPrice = ""
-
+        // init data of photographer profil  
         likesData
         .filter((media) => media.photographerId === parseInt(this.idUrl))
         .map((mediasingle) => {
          likeTotal = likeTotal + mediasingle.likes
-            //console.log(mediasingle.likes)
+           // the phtotographer total of like
            
             contentLike  =  
             `<div class="banner_info">
@@ -145,23 +148,22 @@ export default class HeaderSinglePage {
                 </div>
                 `
 
-           //console.log(document.querySelector('.banner_info p')) 
+           //like and dislike action
                
            document.querySelector("#likes-"+ mediasingle.id).addEventListener("click", () => {
             let infoBanner = document.querySelector('.banner_info p')
                     if(!document.querySelector("#likes-"+mediasingle.id+ " .fa-heart").classList.contains("liked")){
-                        console.log(likeTotal++)
                         document.querySelector("#likes-"+mediasingle.id+ " .fa-heart").classList.add('liked')
                         infoBanner.innerHTML++
                         document.querySelector("#likes-"+mediasingle.id+ " p").innerHTML++
                     } else{
-                        console.log(likeTotal--)
                         document.querySelector("#likes-"+mediasingle.id+ " .fa-heart").classList.remove('liked')
                         infoBanner.innerHTML--
                         document.querySelector("#likes-"+mediasingle.id+ " p").innerHTML--
                     }
                 })
             })   
+            // the phtotographer pricce by day
         priceData
         .map((price) => {
             if (price.id == this.idUrl) {       
@@ -177,7 +179,31 @@ export default class HeaderSinglePage {
        
         this.$likesElement.innerHTML = contentLike + contentPrice  
     } 
+   
+    /**
+     * @param {string} string media of data
+     */
+     async displayContactModal(){
+        // init data of lightbox
+        const conctactinfo = await this.mediasApi.getPhotographers()
 
+        conctactinfo.map((contactInfo) => {
+        let newcontact = new ContactForm(contactInfo)
+        if (contactInfo.id == this.idUrl) { 
+            window.onload=function(){
+                let el = document.getElementById("contact_button")
+                el.addEventListener("click", (e)=>{
+                    newcontact.showModal(e)
+            })
+        }
+        }     
+        })
+        
+        // link with lightbox file
+        
+            
+           
+    }
 
 }
 
@@ -186,7 +212,8 @@ app.displayCardPhotographers()
 app.displayImagesPhotographers()
 app.displayLightBox()
 app.displayLikes()
-app.displaySortFilter()
+//app.displaySortFilter()
+app.displayContactModal()
 
 
 

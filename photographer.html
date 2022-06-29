@@ -15,7 +15,7 @@
 <body>
   <header>
     <a href="index.html">
-      <img src="assets/images/logo.png" class="logo" />
+      <img src="assets/images/logo.png" class="logo" alt= "Fisheye Home page"/>
     </a>
   </header>
   <main id="main">
@@ -35,11 +35,11 @@
       <div id="images-gallery">
 
       </div>
-      <div id="modal-lightbox">
-        <div class="content">
-          <button class="lightbox__close">Fermer</button>
-          <button class="lightbox__prev">Précédent</button>
-          <button class="lightbox__next">Suivant</button>
+      <div id="modal-lightbox" >
+        <div class="content" aria-label="image closeup view">
+          <button class="lightbox__close" aria-label="Close dialog">Fermer</button>
+          <button class="lightbox__prev" aria-label="Previous image">Précédent</button>
+          <button class="lightbox__next" aria-label="Next image">Suivant</button>
           <div id="lightbox__container">
             <div id="lightbox__content"></div>
           
@@ -52,22 +52,9 @@
 
   </section>
   <div id="contact_modal">
-    <div class="modal">
-      <header>
-        <h2>Contactez-moi</h2>
-        <img src="assets/icons/close.svg" onclick="closeModal()" />
-      </header>
-      <form id="'formContact">
-        <div>
-          <label>Prénom</label>
-          <input />
-        </div>
-        <button class="contact_button">Envoyer</button>
-      </form>
-    </div>
+    
   </div>
   <script type="module" src="index.js"></script>
-  <script src="/scripts/utils/contactForm.js"></script>
   
 </body>
 

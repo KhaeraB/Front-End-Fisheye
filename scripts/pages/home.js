@@ -14,8 +14,8 @@ export default class Home {
         $usersWrapper.innerHTML =  onlyPhotographers.map(photographer => 
           
            `<article> 
-               <a href="../photographer.html?id=${photographer.id}" id="link" title="${photographer.name}" >
-                   <img src="../../assets/photographers/photographerId/${photographer.portrait}" alt="photo de ${photographer.name}">
+               <a href="../photographer.html?id=${photographer.id}" id="link" title="${photographer.name}"  aria-label="${photographer.name}">
+                   <img src="../../assets/photographers/photographerId/${photographer.portrait}" alt="${photographer.name}">
                    <h2 alt= "${photographer.name}">${photographer.name}</h2>
                </a>
 

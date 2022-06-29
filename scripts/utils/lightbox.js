@@ -9,7 +9,9 @@ export default class Lightbox {
     constructor(listElement) {
         this.currentElement = null
         this.listElement = listElement
-
+        this.lightboxnext =  document.querySelector("#modal-lightbox .content .lightbox__next")
+        this.lightboxprev =  document.querySelector("#modal-lightbox .content .lightbox__prev")
+        this.lightboxclose = document.querySelector("#modal-lightbox .content .lightbox__close")
         this.trigger = document.getElementsByClassName("cardMedia")
         this.contentMedia = document.querySelector("#modal-lightbox .content #lightbox__container #lightbox__content")
         this.manageElement()
@@ -55,13 +57,13 @@ export default class Lightbox {
     
 
     manageElement() {
-        document.querySelector("#modal-lightbox .content .lightbox__next").addEventListener('click', () => {
+       this.lightboxnext.addEventListener('click', () => {
             this.next()
         })
-        document.querySelector("#modal-lightbox .content .lightbox__prev").addEventListener('click', () => {
+       this.lightboxprev.addEventListener('click', () => {
             this.prev()
         })
-        document.querySelector("#modal-lightbox .content .lightbox__close").addEventListener('click', (e) => {
+        this.lightboxclose.addEventListener('click', (e) => {
             if (e.target == e.currentTarget) {
                 e.preventDefault()
                 this.close()
@@ -91,13 +93,13 @@ export default class Lightbox {
     display() {
         if (this.currentElement.image) {
             this.contentMedia.innerHTML = `
-            <img class='src-content' data-title="${this.currentElement.title}" src="../../assets/photographers/media/${this.currentElement.image}" alt="${this.currentElement.title}" >
+            <img class='src-content' data-title="${this.currentElement.title}" src="../../assets/photographers/media/${this.currentElement.image}" alt="${this.currentElement.title}" aria-label="Liliac Breasted roller" >
             <p id="lightbox__title"> ${this.currentElement.title}</p>`
             this.target.classList.add("show")
         } else {
             this.contentMedia.innerHTML = this.contentMedia.innerHTML = ` 
             <video  title="${this.currentElement.title}" data-title="${this.currentElement.title}" controls  >
-                <source class="src-content"  src="../../assets/photographers/media/${this.currentElement.video}" type="video/mp4" >
+                <source class="src-content"  src="../../assets/photographers/media/${this.currentElement.video}" type="video/mp4" aria-label="Liliac Breasted roller">
             </video> 
             <p id="lightbox__title"> ${this.currentElement.title}</p>`
             this.target.classList.add("show")
