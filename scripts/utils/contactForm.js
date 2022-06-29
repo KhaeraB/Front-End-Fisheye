@@ -7,9 +7,6 @@ export default class ContactForm{
     constructor(photographer){
         this.modal = document.getElementById("contact_modal");
         this.photographer = photographer
-        this.isRequired()
-        this.isNameValid()
-        this.isEmailValid()
         this.message = document.getElementById('message');
         
     }
@@ -98,22 +95,24 @@ export default class ContactForm{
     }
 
      // requiered
-     isRequired = (value) => value === '' ? false : true;
+     isRequired (value){
+      value === '' ? false : true;
+     }
 
      // user name
-    isNameValid = function(name) {
+    isNameValid (name) {
      const regName = new RegExp(
              /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/);
          return regName.test(name);
      };
 
      // user email
-     isEmailValid = (email) => {
+     isEmailValid(email) {
          const regEmail = new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
          return regEmail.test(email);
      };
  
-    checkFirstName = () =>{
+    checkFirstName() {
         const firstName = document.getElementById('firstname');
         const formField = firstName.parentElement;
         const first = firstName.value.trim();
@@ -133,7 +132,7 @@ export default class ContactForm{
         }
       };
       
-      checkLastName = () =>{
+      checkLastName(){
         const lastName = document.getElementById('lastname');
         const formField = lastName.parentElement;
         const last = lastName.value.trim();
@@ -153,7 +152,7 @@ export default class ContactForm{
         }
       };
       
-      checkEmail = () =>{
+      checkEmai(){
         const email = document.getElementById('email');
         const formField = email.parentElement;
         const mail = email.value.trim();
@@ -178,9 +177,6 @@ export default class ContactForm{
 
         
    // }
-    
-
-    
-
+  
 }
 
