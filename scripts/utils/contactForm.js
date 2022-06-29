@@ -10,75 +10,9 @@ export default class ContactForm{
         this.isRequired()
         this.isNameValid()
         this.isEmailValid()
-       
+        this.message = document.getElementById('message');
         
-        this.message = document.getElementById('message');   
     }
-
-
-
-    checkFirstName = () =>{
-        const firstName = document.getElementById('firstname');
-        const formField = firstName.parentElement;
-        const first = firstName.value.trim();
-      console.log(firstName.parentElement)
-        if (!this.isRequired(first)) {
-          formField.setAttribute('data-error', 'Merci de remplir ce champs.');
-          formField.setAttribute('data-error-visible', 'true');
-          return false;
-        } else if (!this.isNameValid(first)) {
-          formField.setAttribute('data-error', 'Votre prenom n\'est pas valide.');
-          formField.setAttribute('data-error-visible', 'true');
-          return false;
-        } else {
-          firstName.style.border = '2px solid #00c040';
-          formField.setAttribute('data-error-visible', 'false');
-          return true;
-        }
-      };
-      
-      checkLastName = () =>{
-        const lastName = document.getElementById('lastname');
-        const formField = lastName.parentElement;
-        const last = lastName.value.trim();
-      
-        if (!this.isRequired(last)) {
-          formField.setAttribute('data-error', 'Merci de remplir ce champs.');
-          formField.setAttribute('data-error-visible', 'true');
-          return false;
-        } else if (!this.isNameValid(last)) {
-          formField.setAttribute('data-error', 'Votre nom n\'est pas valide.');
-          formField.setAttribute('data-error-visible', 'true');
-          return false;
-        } else {
-          lastName.style.border = '2px solid #00c040';
-          formField.setAttribute('data-error-visible', 'false');
-          return true;
-        }
-      };
-      
-      checkEmail = () =>{
-        const email = document.getElementById('email');
-        const formField = email.parentElement;
-        console.log(email)
-        const mail = email.value.trim();
-      
-        if (!this.isRequired(mail)) {
-          formField.setAttribute('data-error', 'Merci de remplir ce champs.');
-          formField.setAttribute('data-error-visible', 'true');
-          return false;
-        } else if (!this.isEmailValid(mail)) {
-          formField.setAttribute('data-error', 'Votre email n\'est pas valide.');
-          formField.setAttribute('data-error-visible', 'true');
-          return false;
-        } else {
-          email.style.border = '2px solid #00c040';
-          formField.setAttribute('data-error-visible', 'false');
-          return true;
-        }
-        
-      };
-
     showModal() {
         this.display()
         let form = document.getElementById("form-modal")
@@ -87,6 +21,7 @@ export default class ContactForm{
         this.isRequired()
         this.isNameValid()
         this.isEmailValid()
+        
 
         form.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -178,7 +113,66 @@ export default class ContactForm{
          return regEmail.test(email);
      };
  
-    
+    checkFirstName = () =>{
+        const firstName = document.getElementById('firstname');
+        const formField = firstName.parentElement;
+        const first = firstName.value.trim();
+      console.log(firstName.parentElement)
+        if (!this.isRequired(first)) {
+          formField.setAttribute('data-error', 'Merci de remplir ce champs.');
+          formField.setAttribute('data-error-visible', 'true');
+          return false;
+        } else if (!this.isNameValid(first)) {
+          formField.setAttribute('data-error', 'Votre prenom n\'est pas valide.');
+          formField.setAttribute('data-error-visible', 'true');
+          return false;
+        } else {
+          firstName.style.border = '2px solid #00c040';
+          formField.setAttribute('data-error-visible', 'false');
+          return true;
+        }
+      };
+      
+      checkLastName = () =>{
+        const lastName = document.getElementById('lastname');
+        const formField = lastName.parentElement;
+        const last = lastName.value.trim();
+      
+        if (!this.isRequired(last)) {
+          formField.setAttribute('data-error', 'Merci de remplir ce champs.');
+          formField.setAttribute('data-error-visible', 'true');
+          return false;
+        } else if (!this.isNameValid(last)) {
+          formField.setAttribute('data-error', 'Votre nom n\'est pas valide.');
+          formField.setAttribute('data-error-visible', 'true');
+          return false;
+        } else {
+          lastName.style.border = '2px solid #00c040';
+          formField.setAttribute('data-error-visible', 'false');
+          return true;
+        }
+      };
+      
+      checkEmail = () =>{
+        const email = document.getElementById('email');
+        const formField = email.parentElement;
+        const mail = email.value.trim();
+      
+        if (!this.isRequired(mail)) {
+          formField.setAttribute('data-error', 'Merci de remplir ce champs.');
+          formField.setAttribute('data-error-visible', 'true');
+          return false;
+        } else if (!this.isEmailValid(mail)) {
+          formField.setAttribute('data-error', 'Votre email n\'est pas valide.');
+          formField.setAttribute('data-error-visible', 'true');
+          return false;
+        } else {
+          email.style.border = '2px solid #00c040';
+          formField.setAttribute('data-error-visible', 'false');
+          return true;
+        }
+        
+      };
     //submit= () =>{
        
 
