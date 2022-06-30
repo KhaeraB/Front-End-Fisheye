@@ -106,10 +106,10 @@ body{
     position: fixed;
     right: 70px;
     bottom: 0px;
-    width: 300px;
+    width: 376px;
     background: rgb(219, 136, 118);
-    border-radius: 5px;
-    height: 70px;
+    border-radius: 5px 5px 0 0;
+    height: 89px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -117,6 +117,14 @@ body{
 }
 .banner_info p{
     padding-right: 20%;
+    font-size: 24px;
+}
+.banner_info .fa{
+    font-size: 24px;
+}
+
+#likes_price .info_price{
+    font-size: 24px;
 }
 #likes_price .banner_info, #like_price .banner_info_price{
     display: flex;

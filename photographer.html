@@ -25,12 +25,14 @@
     <section id="gallery">
       <div class="sortBy">
         <div class="titleSort">Trier par : </div>
-        <select name="sortFilter" id="sort-page">
-            <option class="option" disabled selected hidden>Selectionner</option>
-            <option class="option" value="likes">Popularite</option>
-            <option class="option" value="date">Date</option>
-            <option class="option" value="title">Titre</option>
-        </select>
+        <div class="dropdown ">
+          <input type="text" class="textBox" placeholder="Sélectionner" readonly>
+          <div class="option">
+            <div class="likes">Popularité</div>
+            <div class="date">Date</div>
+            <div  class="title">Titre</div>
+          </div> 
+        </div>
       </div>
       <div id="images-gallery">
 

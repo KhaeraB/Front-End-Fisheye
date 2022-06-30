@@ -6,33 +6,14 @@ export default class ContactForm{
 
     constructor(photographer){
         this.modal = document.getElementById("contact_modal");
-        this.photographer = photographer
-        this.message = document.getElementById('message');
-        
+        this.photographer = photographer 
     }
     showModal() {
-        this.display()
-        let form = document.getElementById("form-modal")
-       console.log(email.parentElement)
-       
-        this.isRequired()
-        this.isNameValid()
-        this.isEmailValid()
+      this.display()
+      
+      let form = document.getElementById("form-modal")
+      form.addEventListener("submit", (event) => this.submit(event));
         
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            // submit to the server if the form is valid
-            const FormValid =[
-                this.checkFirstName(),
-                this.checkLastName(),
-                this.checkEmail()
-            ];
-            if (FormValid.includes(false)) {
-                return false;
-            }
-            return this.closeModal();
-        });
         
         const keys = (e) => {
             e.key === "Escape" && this.closeModal()
@@ -49,9 +30,9 @@ export default class ContactForm{
    
     
     display(){
-        
-        this.modal.classList.add("displayForm")
        
+        this.modal.classList.add("displayForm")
+        
         this.modal.innerHTML = 
             ` <div class="modal">
           <header id="infoPhotographer">
@@ -62,33 +43,36 @@ export default class ContactForm{
           <form method="post" id="form-modal">
                 <div class="formData">
                     <label for="firstname">Prénom</label>
-                    <input name="firstname" id="firstname" type="text" required/>
+                    <input name="firstname" id="firstname" type="text"/>
                 </div>
                 <div class="formData">
                     <label for="lastname">Nom</label>
-                    <input name="lastname" id="lastname" type="text" required/>
+                    <input name="lastname" id="lastname" type="text"/>
                 </div>
                 <div class="formData">
                     <label for="email">Email</label>
-                    <input name="email" id="email" type="email" required/>
+                    <input name="email" id="email" type="email"/>
                 </div>
                 <div class="formData">
                     <label for="message">Votre message</label>
-                    <textarea name="message" id="message" type="text" required></textarea>
+                    <textarea name="message" id="message" type="text"></textarea>
                 </div>
                 <button class="submit" >Envoyer</button>
     
         </div>`
-        document.querySelector(".modal #infoPhotographer #close").addEventListener('click', (e) => {
-            if (e.target == e.currentTarget) {
-                e.preventDefault()
-                this.closeModal()
-            }
-        })  
+        
+       
+        this.manageEl()
+    } 
+    manageEl(){
+      document.querySelector(".modal #infoPhotographer #close").addEventListener('click', (e) => {
+        if (e.target == e.currentTarget) {
+            e.preventDefault()
+            this.closeModal()
+        }
+      })   
     }
     
-    
-     
     closeModal() {
         this.modal.classList.remove('displayForm')
         enableBodyScroll(this.display)  
@@ -96,7 +80,11 @@ export default class ContactForm{
 
      // requiered
      isRequired (value){
-      value === '' ? false : true;
+      if(value === ''){
+        return false
+      }else{
+        return true
+      }
      }
 
      // user name
@@ -120,6 +108,7 @@ export default class ContactForm{
         if (!this.isRequired(first)) {
           formField.setAttribute('data-error', 'Merci de remplir ce champs.');
           formField.setAttribute('data-error-visible', 'true');
+          console.log(this.isRequired)
           return false;
         } else if (!this.isNameValid(first)) {
           formField.setAttribute('data-error', 'Votre prenom n\'est pas valide.');
@@ -136,10 +125,12 @@ export default class ContactForm{
         const lastName = document.getElementById('lastname');
         const formField = lastName.parentElement;
         const last = lastName.value.trim();
-      
+        console.log(document.getElementById('message').parentElement)
+        console.log(lastName.parentElement)
         if (!this.isRequired(last)) {
           formField.setAttribute('data-error', 'Merci de remplir ce champs.');
           formField.setAttribute('data-error-visible', 'true');
+          console.log(this.isRequired)
           return false;
         } else if (!this.isNameValid(last)) {
           formField.setAttribute('data-error', 'Votre nom n\'est pas valide.');
@@ -152,14 +143,15 @@ export default class ContactForm{
         }
       };
       
-      checkEmai(){
+      checkEmail(){
         const email = document.getElementById('email');
         const formField = email.parentElement;
         const mail = email.value.trim();
-      
+        console.log(email.parentElement)
         if (!this.isRequired(mail)) {
           formField.setAttribute('data-error', 'Merci de remplir ce champs.');
           formField.setAttribute('data-error-visible', 'true');
+          console.log(this.isRequired)
           return false;
         } else if (!this.isEmailValid(mail)) {
           formField.setAttribute('data-error', 'Votre email n\'est pas valide.');
@@ -169,14 +161,41 @@ export default class ContactForm{
           email.style.border = '2px solid #00c040';
           formField.setAttribute('data-error-visible', 'false');
           return true;
+         
         }
-        
       };
-    //submit= () =>{
-       
 
-        
-   // }
-  
+      checkMessage(){
+        const message = document.getElementById('message');
+        const formField = message.parentElement;
+        const write = message.value.trim();
+        console.log(message)
+        if (!this.isRequired(write)) {
+          formField.setAttribute('data-error', 'Merci de remplir ce champs.');
+          formField.setAttribute('data-error-visible', 'true');
+          return false;
+        }
+        else{
+          message.style.border = '2px solid #00c040';
+          formField.setAttribute('data-error-visible', 'false');
+          return true;
+        }
+      };
+
+    submit(e) {
+        e.preventDefault();
+        // submit to the server if the form is valid
+        const FormValid =[
+            this.checkFirstName(),
+            this.checkLastName(),
+            this.checkEmail(),
+            this.checkMessage()
+        ];
+        if (FormValid.includes(false)) {
+            return false;
+        }
+        return this.closeModal();
+   }
+   
 }
 
