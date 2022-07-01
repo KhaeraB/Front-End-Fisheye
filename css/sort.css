@@ -37,7 +37,7 @@
     width: 8px;
     height: 8px;
     transition: 0.5s;
-    z-index: 2000;
+    z-index: 300;
 }
 .option{
     display: none;
@@ -48,16 +48,14 @@
     border-top: 1px solid #fff;
     cursor: pointer;
 }
-.select-item:hover{
-   background-color: #7d1717;
-}
+
 label:first-child{
     border-top:0; 
 }
 
 .dropdown{
     position: absolute;
-    top: 19px;
+    top: 15px;
     left: 0;
     background-color: #901C1C;
     border-radius: 0 0 5px 5px;
