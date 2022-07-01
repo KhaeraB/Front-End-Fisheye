@@ -37,6 +37,7 @@
     width: 8px;
     height: 8px;
     transition: 0.5s;
+    z-index: 2000;
 }
 .option{
     display: none;
@@ -56,7 +57,7 @@ label:first-child{
 
 .dropdown{
     position: absolute;
-    top: 66px;
+    top: 19px;
     left: 0;
     background-color: #901C1C;
     border-radius: 0 0 5px 5px;

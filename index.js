@@ -8,5 +8,5 @@ import GetHomePhotographers from './scripts/models/home.js';
 import GetSinglePage from './scripts/models/photographer.js'
 
 
-import Home from './scripts/pages/home.js';
-import HeaderSinglePage from './scripts/pages/headerSinglePage.js';
+import Home from './scripts/pages/Home.js';
+import Profil from './scripts/pages/Profil.js';

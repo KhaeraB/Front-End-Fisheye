@@ -7,7 +7,7 @@ import Lightbox from "../utils/Lightbox.js"
 import SortFilter from "../utils/Sort.js"
 import ContactForm from "../utils/contactForm.js"
 
-export default class HeaderSinglePage {
+export default class Profil {
     constructor() {
         this.$userInfoProfil = document.getElementById("photograph-header")
         this.$userImagesProfil = document.getElementById("images-gallery")
@@ -196,18 +196,22 @@ export default class HeaderSinglePage {
      * Filter Media Profil Photographer
      */
     async displaySortFilter(){
-        // init data of photographer profil  
-        const getDataSort = await this.mediasApi.getPhotos()
-        getDataSort.filter((media) => media.photographerId === parseInt(this.idUrl))
-        const mediaFilter = getDataSort.map(media => new ProfilFactory(media))
-        let filter = new SortFilter(mediaFilter)
        
-        filter.show()
+        const getDataSort = await this.mediasApi.getPhotos()
+        const result = getDataSort.filter((media) => media.photographerId === parseInt(this.idUrl))
+        console.log(result)
+        let filter = new SortFilter(result)
+               document.querySelector("#btn").addEventListener("click", (e) =>{
+                    e.preventDefault()
+                    filter.display(e)
+               })
+
+        
     }
 
 }
 
-const app = new HeaderSinglePage()
+const app = new Profil()
 app.displayCardPhotographers()
 app.displayImagesPhotographers()
 app.displayLightBox()
