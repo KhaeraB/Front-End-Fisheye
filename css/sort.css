@@ -11,83 +11,67 @@
     font-weight: bolder;
     margin-right: 2em;
     line-height: 23.44px;
-    margin-top: 2%;
 }
-.dropdown
-{
-    width: 200px;
-    font-size: 18px;
-    font-weight: 700;
-    padding: 20px;
+#selectElement{
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
-.dropdown::before
-{
-   content: '';
-   position: absolute;
-   right: 20px;
-   top: 25px;
-   z-index: 40;
-   width: 8px;
-   height: 8px;
-   border: 3px solid #fff;
-   border-top: 3px solid #901C1C;
-   border-right : 3px solid #901C1C; 
-   transform: rotate(-45deg);
-   transition: 0.5s;
-   pointer-events: none;
+.btn{
+    align-items: center;
+    background-color: #901C1C;
+    border: 0;
+    border-radius: 5px;
+    color: #fff;
+    display: flex;
+    font-size: 18px;
+    height:69px; 
+    justify-content: space-around;
+    width: 170px;
 }
-.dropdown.active::before{
-    top: 35px;
+.arrow{
+    border: 3px solid #fff;
+    border-top: 3px solid #901C1C;
+    border-right : 3px solid #901C1C; 
+    transform: rotate(-45deg);
+    width: 8px;
+    height: 8px;
+    transition: 0.5s;
+}
+.option{
+    display: none;
+}
+.select-item{
+    padding: 5% 7%; 
+    font-size: 18px;
+    border-top: 1px solid #fff;
+    cursor: pointer;
+}
+.select-item:hover{
+   background-color: #7d1717;
+}
+label:first-child{
+    border-top:0; 
+}
+
+.dropdown{
+    position: absolute;
+    top: 66px;
+    left: 0;
+    background-color: #901C1C;
+    border-radius: 0 0 5px 5px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+    width: 100%;
+    box-sizing: border-box;
+}
+.hidden{
+    display: none;
+}
+
+
+.arrow.active{
     transform: rotate(-225deg);
 }
-
-.dropdown input
-{
-    position: absolute;
-    top: -4px;
-    left:0; 
-    width: 100%;
-    height: 69px;
-    cursor: pointer;
-    background-color: #901C1C;
-    border: none;
-    color: white;
-    padding: 3% 0% 3% 7%;
-    border-radius: 5px;
-    outline: none;
-    z-index: 30;
-
-}
-.dropdown input::placeholder
-{
-    color: white;
-    font-size: 18px;
-}
-.dropdown .option
-{
-   position: absolute;
-   top: 76px;
-   left: 0;
-   width: 100%;
-   background-color: #901C1C;
-   border-radius: 0 0 5px 5px;
-   z-index: 30;
-   padding: 3% 0% 3% 7%;
-   overflow: hidden;
-   display: none;
-}
-select:focus, select:active
-{
-    border: none;
-    outline: none;
-}
-.dropdown .option div
-{
-   padding: 17px 8px;
-   color: white;
-   cursor: pointer;
-}
-
-
-

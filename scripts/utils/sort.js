@@ -1,71 +1,40 @@
 export default class SortFilter {
-    constructor(Media, listElement) {
-        this.Media = Media
-
-       
-        this.$mediaFilter = document.querySelector('.sortBy')
-        this.currentElement = null
-        this.listElement = listElement
+    constructor(media) {
+        this.media = media
+        this.button = document.querySelector("#btn")
+      
+        this.getLabel()
 
     }
 
     
-    sortBy(value){
-      
-    document.querySelectorAll(".cardMedia").forEach( (elt)=>{ elt.remove() } )
+    show(){
+        this.display()
+    }
+    
+    display(){  
+      this.button.addEventListener('click', function(e){
+            e.preventDefault()
+            ToggleHidden()
+        })
+        function ToggleHidden(){
+            const select = document.querySelector("#dropdown")
+            const arrow = document.querySelector(".arrow")
+            select.classList.toggle('hidden')
+            arrow.classList.toggle('active')
+        }
+    }
 
-    let mediasSorteds;
+    
 
-    if ( value == "likes")
-    {
-        /**
-         * tri les données par popularité
-         * @param {array} datas
-         * @returns {array}
-         */
-        function getDataByPop(datas)
-        {
-            return datas.sort((a, b) => {
-                // 'b'(par sa position) sera la reference et sera comparé à 'a', qui sera l'élément suivant
-                // b > a
-                return b.likes - a.likes;
-            });
-        }
-        mediasSorteds = getDataByPop(mediasOfPhotographer)
+    getLabel(){
+        document.querySelectorAll(".option").forEach(function(option){
+            option.addEventListener('click', function(e){
+                const labelElement = document.querySelector(`label[for="${e.target.id}"]`).innerText
+                console.log(labelElement)
+            })
+        }) 
     }
-    if (value == "date")
-    {
-        /**
-         * tri les données par date
-         * @param {array} datas
-         * @returns {array}
-         */
-        function getDataByDate(datas)
-        {
-            return datas.slice().sort((a, b) => {
-            // a < b
-            const valueA = new Date(a.date);
-            const valueB = new Date(b.date);
-            return valueB - valueA;
-            });
-        }
-        mediasSorteds = getDataByDate(mediasOfPhotographer)
-    }
-    if (value == "title")
-    {
-        /**
-         * tri les données par titre
-         * @param {array} datas
-         * @returns {array}
-         */
-        function getDataByTitle(datas)
-        {
-            return datas.sort((a, b) => {
-            return a.title.localeCompare(b.title);
-            });
-        }
-        mediasSorteds = getDataByTitle(mediasOfPhotographer)
-    }
-}
+   
 }
 

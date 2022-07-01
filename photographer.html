@@ -25,15 +25,26 @@
     <section id="gallery">
       <div class="sortBy">
         <div class="titleSort">Trier par : </div>
-        <div class="dropdown ">
-          <input type="text" class="textBox" placeholder="Sélectionner" readonly>
-          <div class="option">
-            <div class="likes">Popularité</div>
-            <div class="date">Date</div>
-            <div  class="title">Titre</div>
-          </div> 
+        <div id="selectElement">
+
+          <button class="btn" id="btn">
+            <span id="select-label">Sélectioner</span> 
+            <div class="arrow"></div>
+          </button>
+
+          <div id="dropdown" class="dropdown hidden">
+            <label for="select-likes" class="select-item">Popularité</label>
+            <input class="option" id="likes" type="radio" name="select"  value="likes">
+            
+            <label for="select-date" class="select-item">Date</label>
+            <input class="option" id="date" type="radio" name="select"  value="date">
+            
+            <label for="select-title" class="select-item">Titre</label>
+            <input class="option" id="title" type="radio" name="select"  value="title">
+          </div>
         </div>
       </div>
+
       <div id="images-gallery">
 
       </div>

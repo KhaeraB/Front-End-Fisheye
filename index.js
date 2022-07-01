@@ -10,4 +10,3 @@ import GetSinglePage from './scripts/models/photographer.js'
 
 import Home from './scripts/pages/home.js';
 import HeaderSinglePage from './scripts/pages/headerSinglePage.js';
-import Lightbox from './scripts/utils/Lightbox.js';

@@ -4,7 +4,7 @@ import ProfilFactory from "../factories/ProfilFactory.js"
 
 import Lightbox from "../utils/Lightbox.js" 
 
-//import SortFilter from "../utils/Sort.js"
+import SortFilter from "../utils/Sort.js"
 import ContactForm from "../utils/contactForm.js"
 
 export default class HeaderSinglePage {
@@ -114,16 +114,7 @@ export default class HeaderSinglePage {
             })  
     }
 
-    async displaySortFilter(){
-        // init data of photographer profil  
-        const getDataSort = await this.mediasApi.getPhotos()
-        let sortData = getDataSort.map(info => new ProfilFactory(info))
-        .filter((media) => media.photographerId === parseInt(this.idUrl))
-        let mediasSorteds = []
-        // link with sort filter
-        let filter = new SortFilter(sortData)
-        document.querySelectorAll("#sortBy").forEach( (elt)=>{ elt.remove() } )
-    }
+    
 
     
     async displayLikes() {
@@ -188,21 +179,30 @@ export default class HeaderSinglePage {
         const conctactinfo = await this.mediasApi.getPhotographers()
 
         conctactinfo.map((contactInfo) => {
-        let newcontact = new ContactForm(contactInfo)
-        if (contactInfo.id == this.idUrl) { 
-            window.onload=function(){
-                let el = document.getElementById("contact_button")
-                el.addEventListener("click", (e)=>{
-                    newcontact.showModal(e)
-            })
-        }
-        }     
+            let newcontact = new ContactForm(contactInfo)
+            if (contactInfo.id == this.idUrl) { 
+                window.onload=function(){
+                    let el = document.getElementById("contact_button")
+                    el.addEventListener("click", (e)=>{
+                        newcontact.showModal(e)
+                    })
+                }
+            }     
         })
-        
-        // link with lightbox file
-        
-            
-           
+    }
+     /**
+     * @param {string} string media of data
+     * 
+     * Filter Media Profil Photographer
+     */
+    async displaySortFilter(){
+        // init data of photographer profil  
+        const getDataSort = await this.mediasApi.getPhotos()
+        getDataSort.filter((media) => media.photographerId === parseInt(this.idUrl))
+        const mediaFilter = getDataSort.map(media => new ProfilFactory(media))
+        let filter = new SortFilter(mediaFilter)
+       
+        filter.show()
     }
 
 }
@@ -212,8 +212,8 @@ app.displayCardPhotographers()
 app.displayImagesPhotographers()
 app.displayLightBox()
 app.displayLikes()
-//app.displaySortFilter()
 app.displayContactModal()
+app.displaySortFilter()
 
 
 
