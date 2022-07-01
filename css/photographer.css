@@ -154,3 +154,42 @@ body{
     color: #901C1C; 
     font-size: 24px;
 }
+
+@media ( min-width: 768px) and (max-width:1024px) {
+    main{
+        width: 100%;
+    }
+    #photograph-header {
+        margin: 0 39px;
+    }
+    .photograph-info {
+        width: 30%;
+    }
+    .photographer_name {
+       
+        font-size: 35px;
+        width: 100%;
+        line-height: 37px;
+    }
+    .sortBy {
+        display: flex;
+        align-items: center;
+        margin: 2% 6%;
+        justify-content: start;
+    }
+    #images-gallery .cardMedia .thumbnail {
+        width: 398px;
+    }
+    #images-gallery {
+        justify-content: flex-start;
+     
+    }
+    #gallery{
+        margin: 0 auto;
+        width: 100%;
+    }
+    #images-gallery .cardMedia {
+        width: 40%;
+        margin: 5%;
+    }
+}

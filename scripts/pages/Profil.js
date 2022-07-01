@@ -60,7 +60,9 @@ export default class Profil {
                     galleryElement.setAttribute("class", "cardMedia" )
                    
                     const image = `
-                    <img class='thumbnail src-content' data-title="${photo.title}" src="../../assets/photographers/media/${photo.image}" alt="${photo.title}" >
+                    <a href="#" aria-label="ouvrir la media">
+                        <img class='thumbnail src-content' data-title="${photo.title}" src="../../assets/photographers/media/${photo.image}" alt="${photo.title}" >
+                    </a>
                     <div class="description">
                         <p class="title">${photo.title}</p>
                         <div id="likes-${photo.id}" class="rent">
@@ -75,12 +77,14 @@ export default class Profil {
                    galleryElement.setAttribute("class", "cardMedia ")
                    galleryElement.setAttribute('data-title', `${photo.title}`) 
                     const video = `
-                      <video  class="thumbnail" data-title="${photo.title}" height="240" >
+                    <a href="#" aria-label="ouvrir la media">
+                        <video  class="thumbnail" data-title="${photo.title}" height="240" >
                           <source class="src-content"  src="../../assets/photographers/media/${photo.video}" type="video/mp4" >
-                      </video>
-                      <div id="video-controls" class="controls" data-state="hidden">
+                        </video>
+                        <div id="video-controls" class="controls" data-state="hidden">
                           <button id="playpause" type="button" data-state="play"><i class="far fa-play-circle"></i></button>
-                    </div>
+                        </div>
+                    </a>
                       <div class="description">
                           <p class="title">${photo.title}</p>
                           <div id="likes-${photo.id}" class="rent">
