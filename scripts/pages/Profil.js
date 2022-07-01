@@ -199,11 +199,13 @@ export default class Profil {
        
         const getDataSort = await this.mediasApi.getPhotos()
         const result = getDataSort.filter((media) => media.photographerId === parseInt(this.idUrl))
-        console.log(result)
+  
         let filter = new SortFilter(result)
                document.querySelector("#btn").addEventListener("click", (e) =>{
                     e.preventDefault()
-                    filter.display(e)
+                    filter.display(result)
+                    
+                    
                })
 
         

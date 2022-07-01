@@ -1,10 +1,10 @@
 import Profil from "../pages/Profil.js"
 export default class SortFilter {
     constructor(media) {
-        this.media = media
+        media 
         this.button = document.querySelector("#btn")
         this.options = document.querySelectorAll(".option")
-       console.log([...this.media])
+        console.log(media)
     }
 
     display() {
@@ -29,39 +29,41 @@ export default class SortFilter {
 
         select.classList.toggle('hidden')
         arrow.classList.toggle('active')  
-
-        if(title === "likes"){
-            filter.sortByLikes()
-
-        }else if(title === "date"){
-            filter.sortByDate()
-        }else if(title === "title"){
-            filter.sortByTitle()
+            console.log(title)
+        if(title === "Popularité"){
+           sortByLikes(media)
+            console.table(media)
+        }else if(title === "Date"){
+           sortByDate(media)
+            console.table(media)
+        }else if(title === "Titre"){
+           sortByTitle(media)
+            console.table(media)
         }else{
-
+            console.table(media)
         }
     }
 
     sortByLikes(){
     
-        this.media.sort(function (a, b) {
+        media.sort(function (a, b) {
             return b.likes - a.likes;
           });
        
-          console.log(this.media)
+          console.log(media)
     }
 
     sortByDate(){
     
-        this.media.sort(function (a, b) {
+        media.sort(function (a, b) {
             return new Date(b.date) - new Date(a.date);
           });
        
-          console.log(this.media)
+          console.log(media)
     }
     sortByTitle(){
     
-        this.media.sort(function(a, b) {
+        media.sort(function(a, b) {
             
             if (a.title.toUpperCase() < b.title.toUpperCase()) {
               return -1;
@@ -73,7 +75,7 @@ export default class SortFilter {
             // names must be equal
             return 0;
           });
-          console.log(this.media)
+          console.log(media)
     }
 
 }
