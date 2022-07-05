@@ -1,10 +1,9 @@
-import Profil from "../pages/Profil.js"
 export default class SortFilter {
     constructor(media) {
-        media 
+        this.media = media
         this.button = document.querySelector("#btn")
         this.options = document.querySelectorAll(".option")
-        console.log(media)
+        this.title = null
     }
 
     display() {
@@ -13,69 +12,59 @@ export default class SortFilter {
       
         select.classList.toggle('hidden')
         arrow.classList.toggle('active')
-      
+       
         this.options.forEach(elt => {
-            elt.addEventListener("click", this.getTitle)
+            elt.addEventListener("click", this.initSort)
         })
+      
     }
 
-    getTitle(evt){
+    initSort(evt){
         const select = document.querySelector("#dropdown")
         const arrow = document.querySelector(".arrow")
         const selectLabel = document.querySelector("#select-label")
-        
-        const title = evt.target.value
-        selectLabel.innerText = title
+        this.title = evt.target.value
+       
+        selectLabel.innerText = this.title
 
         select.classList.toggle('hidden')
         arrow.classList.toggle('active')  
-            console.log(title)
-        if(title === "Popularité"){
-           sortByLikes(media)
-            console.table(media)
-        }else if(title === "Date"){
-           sortByDate(media)
-            console.table(media)
-        }else if(title === "Titre"){
-           sortByTitle(media)
-            console.table(media)
+        /* filtrage */
+        if(this.title === "Popularité"){
+          this.sortByLikes
+        }else if(this.title === "Date"){
+           this.sortByDate
+        }else if(this.title === "Titre"){
+           this.sortByTitle
         }else{
-            console.table(media)
-        }
+            console.table(this.media)
+        } 
     }
-
+    
     sortByLikes(){
     
-        media.sort(function (a, b) {
+        this.media.sort(function (a, b) {
             return b.likes - a.likes;
           });
        
-          console.log(media)
     }
 
     sortByDate(){
     
-        media.sort(function (a, b) {
+        this.media.sort(function (a, b) {
             return new Date(b.date) - new Date(a.date);
           });
        
-          console.log(media)
+          
     }
+
     sortByTitle(){
     
-        media.sort(function(a, b) {
-            
-            if (a.title.toUpperCase() < b.title.toUpperCase()) {
-              return -1;
-            }
-            if (a.title.toUpperCase() >  b.title.toUpperCase()) {
-              return 1;
-            }
-          
-            // names must be equal
-            return 0;
+        this.media.sort(function(a, b) {
+            return a.title.localeCompare(b.title);
           });
-          console.log(media)
+
+          console.log(this.media)
     }
 
 }

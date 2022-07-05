@@ -208,11 +208,8 @@ export default class Profil {
                document.querySelector("#btn").addEventListener("click", (e) =>{
                     e.preventDefault()
                     filter.display(result)
-                    
-                    
+                    filter.sortByTitle(result)
                })
-
-        
     }
 
 }

@@ -10,8 +10,8 @@ export default class Home {
         const photographersData = await this.photographersApi.getPhotographers()
         const onlyPhotographers = photographersData 
        // console.log(onlyPhotographers)
-        let $usersWrapper = document.getElementById('photographer_section')
-        $usersWrapper.innerHTML =  onlyPhotographers.map(photographer => 
+        let usersWrapper = document.getElementById('photographer_section')
+        const thumbnail =  onlyPhotographers.map(photographer => 
           
            `<article> 
                <a href="../photographer.html?id=${photographer.id}" id="link" title="${photographer.name}"  aria-label="${photographer.name}">
@@ -28,7 +28,7 @@ export default class Home {
            
            ).join('')   
 
-       
+           usersWrapper.innerHTML = thumbnail
     }
     
 }
