@@ -227,15 +227,23 @@ export default class Profil {
                    
                     console.log(title)
                     if(title === "Popularité"){
-                       sortByLikes(result);
+                       
+                        result.sort(function (a, b) {
+                            return b.likes - a.likes;
+                        });
+                    
                         console.log("-----Likes-----") 
                         console.table(result)
                     }else if( title === "Date"){
-                       sortByDate(result)
+                        result.sort(function (a, b) {
+                            return new Date(b.date) - new Date(a.date);
+                        }); 
                         console.log("-----Date-----") 
                         console.table(result)
                     }else if (title === "Titre"){
-                       sortByTitle(result)
+                        result.sort(function(a, b) {
+                            return a.title.localeCompare(b.title);
+                          })
                         console.log("-----Title-----") 
                         console.table(result)
                     }
@@ -245,25 +253,7 @@ export default class Profil {
                     });
                 }) 
              
-                })
-
-                function sortByLikes(){
-                    result.sort(function (a, b) {
-                        return b.likes - a.likes;
-                    });
-                }
-            
-                function sortByDate(){
-                    result.sort(function (a, b) {
-                        return new Date(b.date) - new Date(a.date);
-                    });  
-                }
-            
-                function sortByTitle(){
-                    result.sort(function(a, b) {
-                        return a.title.localeCompare(b.title);
-                      })
-                }
+            })
     }
 
 }
