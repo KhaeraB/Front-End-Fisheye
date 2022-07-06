@@ -4,7 +4,6 @@ import ProfilFactory from "../factories/ProfilFactory.js"
 
 import Lightbox from "../utils/Lightbox.js" 
 
-import SortFilter from "../utils/Sort.js"
 import ContactForm from "../utils/contactForm.js"
 
 export default class Profil {
@@ -204,35 +203,67 @@ export default class Profil {
         const getDataSort = await this.mediasApi.getPhotos()
         const result = getDataSort.filter((media) => media.photographerId === parseInt(this.idUrl))
   
-        let filter = new SortFilter(result)
                document.querySelector("#btn").addEventListener("click", (e) =>{
                     e.preventDefault()
-                    filter.display(result)
+                    const select = document.querySelector("#dropdown")
+                    const arrow = document.querySelector(".arrow")
+      
+                    select.classList.toggle('hidden')
+                    arrow.classList.toggle('active')
+                    
                })
                document.querySelectorAll(".option").forEach(elt => {
                 elt.addEventListener("click", (evt)=>{
+                    const select = document.querySelector("#dropdown")
+                    const arrow = document.querySelector(".arrow")
+                    const selectLabel = document.querySelector("#select-label")
+                    const title = evt.target.value
+                    selectLabel.innerText = title
+            
+                    select.classList.toggle('hidden')
+                    arrow.classList.toggle('active') 
 
                     document.querySelectorAll(".cardMedia").forEach( (elt)=>{ elt.remove() } )
-                    const title = evt.target.value
+                   
                     console.log(title)
                     if(title === "Popularité"){
-                       filter.sortByLikes(result);
+                       sortByLikes(result);
                         console.log("-----Likes-----") 
                         console.table(result)
                     }else if( title === "Date"){
-                       filter.sortByDate(result)
+                       sortByDate(result)
                         console.log("-----Date-----") 
                         console.table(result)
                     }else if (title === "Titre"){
-                       filter.sortByTitle(result)
+                       sortByTitle(result)
                         console.log("-----Title-----") 
                         console.table(result)
                     }
                     result.forEach((sort) => {
-                        this.userImagesProfil.insertAdjacentHTML('beforeEnd', this.displayImagesPhotographers(sort));
+                        document.querySelectorAll(".cardMedia").forEach( (elt)=>{ elt.remove() } )
+                        this.displayImagesPhotographers(sort)
                     });
-                })  
+                }) 
+             
                 })
+
+                function sortByLikes(){
+                    result.sort(function (a, b) {
+                        return b.likes - a.likes;
+                    });
+                }
+            
+                function sortByDate(){
+                    result.sort(function (a, b) {
+                        return new Date(b.date) - new Date(a.date);
+                    });  
+                }
+            
+                function sortByTitle(){
+                    result.sort(function(a, b) {
+                        return a.title.localeCompare(b.title);
+                      })
+                }
     }
 
 }
