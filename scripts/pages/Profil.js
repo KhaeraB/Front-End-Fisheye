@@ -211,6 +211,7 @@ export default class Profil {
                })
                document.querySelectorAll(".option").forEach(elt => {
                 elt.addEventListener("click", (evt)=>{
+
                     document.querySelectorAll(".cardMedia").forEach( (elt)=>{ elt.remove() } )
                     const title = evt.target.value
                     console.log(title)
@@ -227,7 +228,9 @@ export default class Profil {
                         console.log("-----Title-----") 
                         console.table(result)
                     }
-                    
+                    result.forEach((sort) => {
+                        this.userImagesProfil.insertAdjacentHTML('beforeEnd', this.displayImagesPhotographers(sort));
+                    });
                 })  
                 })
     }
