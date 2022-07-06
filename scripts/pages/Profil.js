@@ -2,9 +2,18 @@ import AllPhotographers from "../api/Api.js"
 
 import ProfilFactory from "../factories/ProfilFactory.js"
 
+import PhotographersGalleryFactory from "../factories/PhotographersGallery.js"
+
 import Lightbox from "../utils/Lightbox.js" 
 
 import ContactForm from "../utils/contactForm.js"
+
+let PHOTOGRAPHERS = await new AllPhotographers(
+    "../data/fisheye-data.json"
+  ).getPhotos();
+const medias = PHOTOGRAPHERS.filter((data) => data.photographerId === parseInt(new URL(window.location.href).searchParams.get("id")))
+
+console.log("----DATA----", medias)
 
 export default class Profil {
     constructor() {
@@ -39,62 +48,12 @@ export default class Profil {
         })
     }
 
-    async displayImagesPhotographers() {
-        const galleryPhotographers = await this.mediasApi.getPhotos()
-        const imagesData = galleryPhotographers
-        
-        imagesData
-            .filter((media) => media.photographerId === parseInt(this.idUrl))
-            .map((mediasingle) => {
-                new ProfilFactory(mediasingle, this.idUrl)
-            })
-        imagesData.forEach((photo) => {
+    async displayImagesPhotographers(contents) {
+        console.log(contents)
+        contents.forEach((photo) => {
             if (photo.photographerId == parseInt(this.idUrl)) {
-                
-                const galleryElement = document.createElement("article")
-                galleryElement.setAttribute('data-title', `${photo.title}`)
-                galleryElement.setAttribute("aria-label", "Liliac Breasted roller, closeup view")
-                if ("image" in photo) {
-                  
-                    galleryElement.setAttribute("class", "cardMedia" )
-                   
-                    const image = `
-                    <a href="#" aria-label="ouvrir la media">
-                        <img class='thumbnail src-content' data-title="${photo.title}" src="../../assets/photographers/media/${photo.image}" alt="${photo.title}" >
-                    </a>
-                    <div class="description">
-                        <p class="title">${photo.title}</p>
-                        <div id="likes-${photo.id}" class="rent">
-                            <p>${photo.likes} </p>
-                            <i class="fa fa-heart " aria-hidden="true" aria-label="likes"></i>
-                        </div>
-                    </div>` 
-        
-                    galleryElement.innerHTML = image
-              
-                } else {
-                   galleryElement.setAttribute("class", "cardMedia ")
-                   galleryElement.setAttribute('data-title', `${photo.title}`) 
-                    const video = `
-                    <a href="#" aria-label="ouvrir la media">
-                        <video  class="thumbnail" data-title="${photo.title}" height="240" >
-                          <source class="src-content"  src="../../assets/photographers/media/${photo.video}" type="video/mp4" >
-                        </video>
-                        <div id="video-controls" class="controls" data-state="hidden">
-                          <button id="playpause" type="button" data-state="play"><i class="far fa-play-circle"></i></button>
-                        </div>
-                    </a>
-                      <div class="description">
-                          <p class="title">${photo.title}</p>
-                          <div id="likes-${photo.id}" class="rent">
-                              <p>${photo.likes} </p>
-                              <i class="fa fa-heart " aria-hidden="true" aria-label="likes"></i>
-                          </div>
-                      </div>` 
-                      galleryElement.innerHTML = video
-                            
-                }
-                this.userImagesProfil.append(galleryElement)
+               const viewCard =  new PhotographersGalleryFactory(photo)
+               viewCard.ViewCardMedia()
             }
           
         })
@@ -104,11 +63,12 @@ export default class Profil {
      */
     async displayLightBox(){
         // init data of lightbox
-        const mediaList = await this.mediasApi.getPhotos()
-        let listMedia = mediaList.map(media => new ProfilFactory(media))
+     
+        medias.map(media => new ProfilFactory(media))
         .filter((media) => media.photographerId === parseInt(this.idUrl))
+        
         // link with lightbox file
-        let lightbox = new Lightbox(listMedia)
+        let lightbox = new Lightbox(medias)
       
             document.querySelectorAll("#images-gallery .cardMedia .thumbnail").forEach(elDom => {
                 elDom.addEventListener("click", (e)=>{
@@ -199,68 +159,59 @@ export default class Profil {
      * Filter Media Profil Photographer
      */
     async displaySortFilter(){
-       
-        const getDataSort = await this.mediasApi.getPhotos()
-        const result = getDataSort.filter((media) => media.photographerId === parseInt(this.idUrl))
-  
-               document.querySelector("#btn").addEventListener("click", (e) =>{
-                    e.preventDefault()
-                    const select = document.querySelector("#dropdown")
-                    const arrow = document.querySelector(".arrow")
+        
+        document.querySelector("#btn").addEventListener("click", (e) => {
+            e.preventDefault();
+            this.display(medias);
+          });
+          document.querySelectorAll(".option").forEach((elt) => {
+            elt.addEventListener("click", (evt) => {
+              document.querySelectorAll(".cardMedia").forEach((elt) => {
+                elt.remove();
+              });
+              const title = evt.target.value;
       
-                    select.classList.toggle('hidden')
-                    arrow.classList.toggle('active')
-                    
-               })
-               document.querySelectorAll(".option").forEach(elt => {
-                elt.addEventListener("click", (evt)=>{
-                    const select = document.querySelector("#dropdown")
-                    const arrow = document.querySelector(".arrow")
-                    const selectLabel = document.querySelector("#select-label")
-                    const title = evt.target.value
-                    selectLabel.innerText = title
-            
-                    select.classList.toggle('hidden')
-                    arrow.classList.toggle('active') 
+              switch (title) {
+                case "Popularité":
+                  console.log("Popularité");
+                  medias?.sort(function (a, b) {
+                    return b.likes - a.likes;
+                  });
+                  this.display;
+                  break;
+                case "Date":
+                  console.log("Date");
+                  medias?.sort(function (a, b) {
+                    return new Date(b.date) - new Date(a.date);
+                  });
+                  break;
+                case "Titre":
+                  console.log("Titre");
+                  medias?.sort(function (a, b) {
+                    return a.title?.localeCompare(b.title);
+                  });
+                  break;
+              }
+     
+              this.displayImagesPhotographers(medias);
+      
+            });
+          });
+      
+    }
+    display(){
+        const select = document.querySelector("#dropdown")
+        const arrow = document.querySelector(".arrow")
 
-                    document.querySelectorAll(".cardMedia").forEach( (elt)=>{ elt.remove() } )
-                   
-                    console.log(title)
-                    if(title === "Popularité"){
-                       
-                        result.sort(function (a, b) {
-                            return b.likes - a.likes;
-                        });
-                    
-                        console.log("-----Likes-----") 
-                        console.table(result)
-                    }else if( title === "Date"){
-                        result.sort(function (a, b) {
-                            return new Date(b.date) - new Date(a.date);
-                        }); 
-                        console.log("-----Date-----") 
-                        console.table(result)
-                    }else if (title === "Titre"){
-                        result.sort(function(a, b) {
-                            return a.title.localeCompare(b.title);
-                          })
-                        console.log("-----Title-----") 
-                        console.table(result)
-                    }
-                    result.forEach((sort) => {
-                        document.querySelectorAll(".cardMedia").forEach( (elt)=>{ elt.remove() } )
-                        this.displayImagesPhotographers(sort)
-                    });
-                }) 
-             
-            })
+        select.classList.toggle('hidden')
+        arrow.classList.toggle('active')
     }
 
 }
 
 const app = new Profil()
 app.displayCardPhotographers()
-app.displayImagesPhotographers()
+app.displayImagesPhotographers(medias)
 app.displayLightBox()
 app.displayLikes()
 app.displayContactModal()
