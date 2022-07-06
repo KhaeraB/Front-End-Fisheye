@@ -9,11 +9,11 @@ import ContactForm from "../utils/contactForm.js"
 
 export default class Profil {
     constructor() {
-        this.$userInfoProfil = document.getElementById("photograph-header")
-        this.$userImagesProfil = document.getElementById("images-gallery")
-        this.$likesElement = document.getElementById("likes_price")
+        this.userInfoProfil = document.getElementById("photograph-header")
+        this.userImagesProfil = document.getElementById("images-gallery")
+        this.likesElement = document.getElementById("likes_price")
         
-        this.$priceEl = document.querySelectorAll("#like_price ")
+       
         this.mediasApi = new AllPhotographers("../data/fisheye-data.json")
 
         this.idUrl = new URL(window.location.href).searchParams.get("id")
@@ -24,7 +24,7 @@ export default class Profil {
         const data = photographersData
         data.map((info) => {
             if(info.id == this.idUrl){
-                this.$userInfoProfil.innerHTML = 
+                this.userInfoProfil.innerHTML = 
                 `<div class="photograph-info">
                     <h1 class="photographer_name">${info.name}</h1>
                     <h2 class="photographer_city">${info.city}, ${info.country}</h2>
@@ -95,7 +95,7 @@ export default class Profil {
                       galleryElement.innerHTML = video
                             
                 }
-                this.$userImagesProfil.append(galleryElement)
+                this.userImagesProfil.append(galleryElement)
             }
           
         })
@@ -172,7 +172,7 @@ export default class Profil {
         }) 
         //console.log(document.querySelector("#likes .fa-heart").classList.contains("liked"))
        
-        this.$likesElement.innerHTML = contentLike + contentPrice  
+        this.likesElement.innerHTML = contentLike + contentPrice  
     } 
    
     /**
@@ -209,6 +209,27 @@ export default class Profil {
                     e.preventDefault()
                     filter.display(result)
                })
+               document.querySelectorAll(".option").forEach(elt => {
+                elt.addEventListener("click", (evt)=>{
+                    document.querySelectorAll(".cardMedia").forEach( (elt)=>{ elt.remove() } )
+                    const title = evt.target.value
+                    console.log(title)
+                    if(title === "Popularité"){
+                       filter.sortByLikes(result);
+                        console.log("-----Likes-----") 
+                        console.table(result)
+                    }else if( title === "Date"){
+                       filter.sortByDate(result)
+                        console.log("-----Date-----") 
+                        console.table(result)
+                    }else if (title === "Titre"){
+                       filter.sortByTitle(result)
+                        console.log("-----Title-----") 
+                        console.table(result)
+                    }
+                    
+                })  
+                })
     }
 
 }
