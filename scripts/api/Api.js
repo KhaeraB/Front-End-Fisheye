@@ -1,6 +1,8 @@
 class Api {	
 	constructor(url) {
-	this.url = url
+	
+    url = "./data/fisheye-data.json"
+    this.url = url
 	}
 	
         async getPhotographesJSON() {
@@ -42,7 +44,4 @@ class Api {
         async getLikes() {
             return await this.getLikesJSON()
         }
-
-	
-		
 	}
