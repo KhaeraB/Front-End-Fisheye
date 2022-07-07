@@ -13,7 +13,6 @@ let PHOTOGRAPHERS = await new AllPhotographers(
   ).getPhotos();
 const medias = PHOTOGRAPHERS.filter((data) => data.photographerId === parseInt(new URL(window.location.href).searchParams.get("id")))
 
-console.log("----DATA----", medias)
 
 export default class Profil {
     constructor() {
@@ -49,7 +48,7 @@ export default class Profil {
     }
 
     async displayImagesPhotographers(contents) {
-        console.log(contents)
+     
         contents.forEach((photo) => {
             if (photo.photographerId == parseInt(this.idUrl)) {
                const viewCard =  new PhotographersGalleryFactory(photo)
@@ -76,7 +75,10 @@ export default class Profil {
                 elDom.addEventListener("click", (e)=>{
                     lightbox.show(e.currentTarget.dataset.title)
                 })
-            })  
+                
+            })
+            
+
     }
 
     
@@ -205,8 +207,9 @@ export default class Profil {
               }
      
               this.displayImagesPhotographers(medias);
-      
+              this.displayLightBox(medias)
             });
+            
           });
       
     }

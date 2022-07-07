@@ -21,17 +21,9 @@ export default class Lightbox {
     }
     show(title) {
         this.currentElement = this.getTitle(title)
-        for (let i = 0; i < this.currentElement.length; i++) {
-            const media = this.currentElement[i];
-            
-            console.log(media)
-            media.addEventListener("click", () => {
-              const beforeElementFocus = document.activeElement;
-              new Lightbox(this.currentElement, beforeElementFocus);
-            });
-          }
         this.display()
         disableBodyScroll(this.display)
+        
     }
 
     prev() {
@@ -65,19 +57,17 @@ export default class Lightbox {
     
 
     manageElement() {
-       this.lightboxnext.addEventListener('click', (e) => {
-            e.stopPropagation();
+       this.lightboxnext.addEventListener('click', () => {
             this.next()
-        
         })
-       this.lightboxprev.addEventListener('click', (e) => {
-            e.stopPropagation();
+       this.lightboxprev.addEventListener('click', () => {
             this.prev()
-         
         })
         this.lightboxclose.addEventListener('click', (e) => {
-            e.stopPropagation();
-            this.close()    
+            if (e.target == e.currentTarget) {
+                e.preventDefault()
+                this.close()
+            }
         })
         /**
          * les entrés clavier sur la lightbox
@@ -101,7 +91,6 @@ export default class Lightbox {
     }
 
     display() {
-        
         if (this.currentElement.image) {
             this.contentMedia.innerHTML = `
             <img class='src-content' data-title="${this.currentElement.title}" src="../../assets/photographers/media/${this.currentElement.image}" alt="${this.currentElement.title}" aria-label="Liliac Breasted roller" >
@@ -120,7 +109,6 @@ export default class Lightbox {
 
     getTitle(title) {
         return this.listElement.find(element => element.title == title)
-       
     }
 
 
