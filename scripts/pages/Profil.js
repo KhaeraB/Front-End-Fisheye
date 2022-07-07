@@ -63,14 +63,16 @@ export default class Profil {
      */
     async displayLightBox(){
         // init data of lightbox
-     
+ 
         medias.map(media => new ProfilFactory(media))
         .filter((media) => media.photographerId === parseInt(this.idUrl))
         
         // link with lightbox file
         let lightbox = new Lightbox(medias)
       
-            document.querySelectorAll("#images-gallery .cardMedia .thumbnail").forEach(elDom => {
+            document
+            .querySelectorAll("#images-gallery .cardMedia .thumbnail")
+            .forEach((elDom) => {
                 elDom.addEventListener("click", (e)=>{
                     lightbox.show(e.currentTarget.dataset.title)
                 })
@@ -89,6 +91,8 @@ export default class Profil {
         let contentLike = ""
         let contentPrice = ""
         // init data of photographer profil  
+
+        
         likesData
         .filter((media) => media.photographerId === parseInt(this.idUrl))
         .map((mediasingle) => {
@@ -141,6 +145,7 @@ export default class Profil {
         // init data of lightbox
         const conctactinfo = await this.mediasApi.getPhotographers()
 
+
         conctactinfo.map((contactInfo) => {
             let newcontact = new ContactForm(contactInfo)
             if (contactInfo.id == this.idUrl) { 
@@ -159,18 +164,24 @@ export default class Profil {
      * Filter Media Profil Photographer
      */
     async displaySortFilter(){
-        
+         
         document.querySelector("#btn").addEventListener("click", (e) => {
             e.preventDefault();
             this.display(medias);
           });
           document.querySelectorAll(".option").forEach((elt) => {
+                const select = document.querySelector("#dropdown")
+                const arrow = document.querySelector(".arrow")
+                const selectLabel = document.querySelector("#select-label")
             elt.addEventListener("click", (evt) => {
-              document.querySelectorAll(".cardMedia").forEach((elt) => {
-                elt.remove();
+                document.querySelectorAll(".cardMedia").forEach((elt) => {
+                    elt.remove();
               });
-              const title = evt.target.value;
-      
+              
+                const title = evt.target.value;
+                selectLabel.innerText = title
+                select.classList.toggle('hidden')
+                arrow.classList.toggle('active')
               switch (title) {
                 case "Popularité":
                   console.log("Popularité");

@@ -21,9 +21,17 @@ export default class Lightbox {
     }
     show(title) {
         this.currentElement = this.getTitle(title)
+        for (let i = 0; i < this.currentElement.length; i++) {
+            const media = this.currentElement[i];
+            
+            console.log(media)
+            media.addEventListener("click", () => {
+              const beforeElementFocus = document.activeElement;
+              new Lightbox(this.currentElement, beforeElementFocus);
+            });
+          }
         this.display()
         disableBodyScroll(this.display)
-        
     }
 
     prev() {
@@ -57,21 +65,19 @@ export default class Lightbox {
     
 
     manageElement() {
-       this.lightboxnext.addEventListener('click', () => {
-            if (e.target == e.currentTarget) {
-                this.next()
-            }
+       this.lightboxnext.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.next()
+        
         })
-       this.lightboxprev.addEventListener('click', () => {
-            if (e.target == e.currentTarget) {
-                this.prev()
-            }
+       this.lightboxprev.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.prev()
+         
         })
         this.lightboxclose.addEventListener('click', (e) => {
-            if (e.target == e.currentTarget) {
-                e.preventDefault()
-                this.close()
-            }
+            e.stopPropagation();
+            this.close()    
         })
         /**
          * les entrés clavier sur la lightbox
@@ -95,21 +101,7 @@ export default class Lightbox {
     }
 
     display() {
-        for (let i = 0; i < generatedMedias.length; i++) {
-            const media = generatedMedias[i];
-            const mediaLink = media.dataset.title;
-            const title = generatedTitles[i];
-            media.addEventListener("click", () => {
-              const beforeElementFocus = document.activeElement;
-              new Lightbox(
-                mediaLink,
-                tabLinks,
-                title.innerText,
-                titles,
-               prev
-              );
-            });
-          }
+        
         if (this.currentElement.image) {
             this.contentMedia.innerHTML = `
             <img class='src-content' data-title="${this.currentElement.title}" src="../../assets/photographers/media/${this.currentElement.image}" alt="${this.currentElement.title}" aria-label="Liliac Breasted roller" >
@@ -123,12 +115,12 @@ export default class Lightbox {
             <p id="lightbox__title"> ${this.currentElement.title}</p>`
             this.target.classList.add("show")
         }
-
     }
 
 
     getTitle(title) {
         return this.listElement.find(element => element.title == title)
+       
     }
 
 
