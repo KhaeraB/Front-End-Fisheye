@@ -1,12 +1,12 @@
-import AllPhotographers from "../api/Api.js"
+import AllPhotographers from "./api/Api.js"
 
-import ProfilFactory from "../factories/ProfilFactory.js"
+import ProfilFactory from "./factories/ProfilFactory.js"
 
-import PhotographersGalleryFactory from "../factories/PhotographersGallery.js"
+import PhotographersGalleryFactory from "./factories/PhotographersGallery.js"
 
-import Lightbox from "../utils/Lightbox.js" 
+import Lightbox from "./utils/Lightbox.js" 
 
-import ContactForm from "../utils/contactForm.js"
+import ContactForm from "./utils/contactForm.js"
 
 let PHOTOGRAPHERS = await new AllPhotographers(
     "../data/fisheye-data.json"
