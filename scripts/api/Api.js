@@ -4,6 +4,7 @@ class Api {
 	}
 	
         async getPhotographesJSON() {
+            console.log(this.url)
             return fetch(this.url)
             .then(res => res.json())
             .then(res => res.photographers)
