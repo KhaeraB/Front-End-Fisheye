@@ -208,6 +208,7 @@ export default class Profil {
      
               this.displayImagesPhotographers(medias);
               this.displayLightBox(medias)
+              this.displayLikes(medias)
             });
             
           });
