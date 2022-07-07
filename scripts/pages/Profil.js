@@ -1,15 +1,15 @@
-import AllPhotographers from "./api/Api.js"
+import AllPhotographers from "api/Api.js"
 
-import ProfilFactory from "./factories/ProfilFactory.js"
+import ProfilFactory from "factories/ProfilFactory.js"
 
-import PhotographersGalleryFactory from "./factories/PhotographersGallery.js"
+import PhotographersGalleryFactory from "factories/PhotographersGallery.js"
 
-import Lightbox from "./utils/Lightbox.js" 
+import Lightbox from "utils/Lightbox.js" 
 
-import ContactForm from "./utils/contactForm.js"
+import ContactForm from "utils/contactForm.js"
 
 let PHOTOGRAPHERS = await new AllPhotographers(
-    "../data/fisheye-data.json"
+    "./data/fisheye-data.json"
   ).getPhotos();
 const medias = PHOTOGRAPHERS.filter((data) => data.photographerId === parseInt(new URL(window.location.href).searchParams.get("id")))
 
@@ -21,7 +21,7 @@ export default class Profil {
         this.likesElement = document.getElementById("likes_price")
         
        
-        this.mediasApi = new AllPhotographers("../data/fisheye-data.json")
+        this.mediasApi = new AllPhotographers("./data/fisheye-data.json")
 
         this.idUrl = new URL(window.location.href).searchParams.get("id")
 
