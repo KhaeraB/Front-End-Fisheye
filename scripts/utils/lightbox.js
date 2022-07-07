@@ -93,13 +93,13 @@ export default class Lightbox {
     display() {
         if (this.currentElement.image) {
             this.contentMedia.innerHTML = `
-            <img class='src-content' data-title="${this.currentElement.title}" src="../../assets/photographers/media/${this.currentElement.image}" alt="${this.currentElement.title}" aria-label="Liliac Breasted roller" >
+            <img class='src-content' data-title="${this.currentElement.title}" src="./assets/photographers/media/${this.currentElement.image}" alt="${this.currentElement.title}" aria-label="Liliac Breasted roller" >
             <p id="lightbox__title"> ${this.currentElement.title}</p>`
             this.target.classList.add("show")
         } else {
             this.contentMedia.innerHTML = this.contentMedia.innerHTML = ` 
             <video  title="${this.currentElement.title}" data-title="${this.currentElement.title}" controls  >
-                <source class="src-content"  src="../../assets/photographers/media/${this.currentElement.video}" type="video/mp4" aria-label="Liliac Breasted roller">
+                <source class="src-content"  src="./assets/photographers/media/${this.currentElement.video}" type="video/mp4" aria-label="Liliac Breasted roller">
             </video> 
             <p id="lightbox__title"> ${this.currentElement.title}</p>`
             this.target.classList.add("show")

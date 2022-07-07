@@ -15,7 +15,7 @@ export default class PhotographersGalleryFactory{
            
             const image = `
             <a href="#" aria-label="ouvrir la media">
-                <img class='thumbnail src-content' data-title="${this.photo.title}" src="../../assets/photographers/media/${this.photo.image}" alt="${this.photo.title}" >
+                <img class='thumbnail src-content' data-title="${this.photo.title}" src="./assets/photographers/media/${this.photo.image}" alt="${this.photo.title}" >
             </a>
             <div class="description">
                 <p class="title">${this.photo.title}</p>
@@ -33,7 +33,7 @@ export default class PhotographersGalleryFactory{
             const video = `
             <a href="#" aria-label="ouvrir la media">
                 <video  class="thumbnail" data-title="${this.photo.title}" height="240" >
-                  <source class="src-content"  src="../../assets/photographers/media/${this.photo.video}" type="video/mp4" >
+                  <source class="src-content"  src="./assets/photographers/media/${this.photo.video}" type="video/mp4" >
                 </video>
                 <div id="video-controls" class="controls" data-state="hidden">
                   <button id="playpause" type="button" data-state="play"><i class="far fa-play-circle"></i></button>

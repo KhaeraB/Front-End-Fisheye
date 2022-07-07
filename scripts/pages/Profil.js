@@ -41,7 +41,7 @@ export default class Profil {
                     Contactez-moi
                 </button>
                 <div class="photograph-avatar">
-                    <img src="../../assets/photographers/photographerId/${info.portrait}" alt="photo de ${info.name}">
+                    <img src="./assets/photographers/photographerId/${info.portrait}" alt="photo de ${info.name}">
                 </div>`
             }
         })
