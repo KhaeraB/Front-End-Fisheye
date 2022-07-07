@@ -1,4 +1,4 @@
-import AllPhotographers from "./api/Api.js"
+import AllPhotographers from "../api/Api.js"
 
 export default class Home {
     constructor() {
