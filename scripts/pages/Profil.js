@@ -190,25 +190,25 @@ export default class Profil {
                   medias?.sort(function (a, b) {
                     return b.likes - a.likes;
                   });
-                  this.display;
+                  this.displayImagesPhotographers(medias);
                   break;
                 case "Date":
                   console.log("Date");
                   medias?.sort(function (a, b) {
                     return new Date(b.date) - new Date(a.date);
                   });
+                  this.displayImagesPhotographers(medias);
                   break;
                 case "Titre":
                   console.log("Titre");
                   medias?.sort(function (a, b) {
                     return a.title?.localeCompare(b.title);
                   });
+                  this.displayImagesPhotographers(medias);
                   break;
               }
-     
-              this.displayImagesPhotographers(medias);
-              this.displayLightBox(medias)
-              this.displayLikes(medias)
+              this.displayLightBox()
+              this.displayLikes()
             });
             
           });
