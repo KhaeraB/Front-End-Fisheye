@@ -5,7 +5,4 @@ import ProfilFactory from './scripts/factories/ProfilFactory.js';
 
 
 import GetHomePhotographers from './scripts/models/home.js'; 
-import GetSinglePage from './scripts/models/photographer.js'
-
-
-
+import GetSinglePage from './scripts/models/photographer.js';
