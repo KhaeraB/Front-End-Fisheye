@@ -99,7 +99,7 @@ export default class ContactForm{
         const firstName = document.getElementById('firstname');
         const formField = firstName.parentElement;
         const first = firstName.value.trim();
-    
+        console.log("Prénom :", firstName.value)
         if (!this.isRequired(first)) {
           formField.setAttribute('data-error', 'Merci de remplir ce champs.');
           formField.setAttribute('data-error-visible', 'true');
@@ -120,7 +120,7 @@ export default class ContactForm{
         const lastName = document.getElementById('lastname');
         const formField = lastName.parentElement;
         const last = lastName.value.trim();
-
+        console.log("Nom :",lastName.value)
 
         if (!this.isRequired(last)) {
           formField.setAttribute('data-error', 'Merci de remplir ce champs.');
@@ -142,7 +142,7 @@ export default class ContactForm{
         const email = document.getElementById('email');
         const formField = email.parentElement;
         const mail = email.value.trim();
-      
+        console.log("Email :",email.value)
         if (!this.isRequired(mail)) {
           formField.setAttribute('data-error', 'Merci de remplir ce champs.');
           formField.setAttribute('data-error-visible', 'true');
@@ -164,7 +164,7 @@ export default class ContactForm{
         const message = document.getElementById('message');
         const formField = message.parentElement;
         const write = message.value.trim();
-    
+        console.log("Message :",message.value)
         if (!this.isRequired(write)) {
           formField.setAttribute('data-error', 'Merci de remplir ce champs.');
           formField.setAttribute('data-error-visible', 'true');
@@ -175,11 +175,14 @@ export default class ContactForm{
           formField.setAttribute('data-error-visible', 'false');
           return true;
         }
+        
       };
 //envoi
     submit(e) {
         e.preventDefault();
         // submit to the server if the form is valid
+        
+
         const FormValid =[
             this.checkFirstName(),
             this.checkLastName(),
