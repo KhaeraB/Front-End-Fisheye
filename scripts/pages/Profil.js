@@ -28,7 +28,7 @@ export default class Profil {
         
        
         this.mediasApi = new AllPhotographers("../data/fisheye-data.json")
-
+        // match Id dans l'url avec la vignette du photographe
         this.idUrl = new URL(window.location.href).searchParams.get("id")
 
     }
@@ -40,6 +40,7 @@ export default class Profil {
         const photographersData = await this.mediasApi.getPhotographers()
         const data = photographersData
         data.map((info) => {
+            // id l'id du photographe et cette dans l'url 
             if(info.id == this.idUrl){
                 this.userInfoProfil.innerHTML = 
                 `<div class="photograph-info">
