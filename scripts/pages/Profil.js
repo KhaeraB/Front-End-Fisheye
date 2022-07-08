@@ -4,7 +4,7 @@ import ProfilFactory from "../factories/ProfilFactory.js"
 
 import PhotographersGalleryFactory from "../factories/PhotographersGallery.js"
 
-import Lightbox from "../utils/Lightbox.js" 
+import Lightbox from "/utils/Lightbox.js" 
 
 import ContactForm from "../utils/contactForm.js"
 
