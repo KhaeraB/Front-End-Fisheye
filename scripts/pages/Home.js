@@ -1,11 +1,14 @@
+// appel du fichierr gérant la data Json
 import AllPhotographers from "../api/Api.js"
 
 export default class Home {
     constructor() {
-
         this.photographersApi = new AllPhotographers('../data/fisheye-data.json')
     }
-
+    /**
+     * @param {Arrray} Arrray media of data
+     * affichage des vignettes des photographes avec leurs informations
+     */
     async displayPhotographers() {
         const photographersData = await this.photographersApi.getPhotographers()
         const onlyPhotographers = photographersData 
@@ -32,6 +35,6 @@ export default class Home {
     }
     
 }
-
+// affichage de View
 const app = new Home()
 app.displayPhotographers() 

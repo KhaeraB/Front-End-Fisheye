@@ -19,13 +19,14 @@ export default class Lightbox {
         this.target = document.querySelector("#modal-lightbox")
 
     }
+    // affichage de la lightbox
     show(title) {
         this.currentElement = this.getTitle(title)
         this.display()
         disableBodyScroll(this.display)
         
     }
-
+// fleche de gauche retour
     prev() {
         let index = this.listElement.findIndex(element => element.title == this.currentElement.title)
         if (index == 0) {
@@ -36,7 +37,7 @@ export default class Lightbox {
         this.display()
 
     }
-
+// fleche de gauche avant
     next() {
         let index = this.listElement.findIndex(element =>element.title == this.currentElement.title)
         if (index == this.listElement.length - 1) {
@@ -47,7 +48,7 @@ export default class Lightbox {
         this.display()
 
     }
-
+// crroix fermeture
     close() {
         this.target.classList.remove("show")
         enableBodyScroll(this.display)
@@ -55,7 +56,7 @@ export default class Lightbox {
     
 
     
-
+// gestion des events
     manageElement() {
        this.lightboxnext.addEventListener('click', () => {
             this.next()
@@ -89,7 +90,7 @@ export default class Lightbox {
         })
 
     }
-
+// Affichage de la modal HTML pour le DOM
     display() {
         if (this.currentElement.image) {
             this.contentMedia.innerHTML = `
@@ -106,7 +107,7 @@ export default class Lightbox {
         }
     }
 
-
+// récupération par titre 
     getTitle(title) {
         return this.listElement.find(element => element.title == title)
     }

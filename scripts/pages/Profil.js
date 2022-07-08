@@ -1,3 +1,4 @@
+// appel des fichiers 
 import AllPhotographers from "../api/Api.js"
 
 import ProfilFactory from "../factories/ProfilFactory.js"
@@ -7,13 +8,18 @@ import PhotographersGalleryFactory from "../factories/PhotographersGallery.js"
 import Lightbox from "../utils/Lightbox.js" 
 
 import ContactForm from "../utils/contactForm.js"
-
+/**
+* @param {Arrray} Arrray media of data
+* Appel en global des media des photographe pour le filtre 
+*/
 let PHOTOGRAPHERS = await new AllPhotographers(
     "./data/fisheye-data.json"
   ).getPhotos();
 const medias = PHOTOGRAPHERS.filter((data) => data.photographerId === parseInt(new URL(window.location.href).searchParams.get("id")))
 
-
+/**
+ * @param {DataView} 
+*/
 export default class Profil {
     constructor() {
         this.userInfoProfil = document.getElementById("photograph-header")
@@ -26,6 +32,10 @@ export default class Profil {
         this.idUrl = new URL(window.location.href).searchParams.get("id")
 
     }
+    /**
+     * @param {Arrray} Arrray media of data
+     * affichage des information du photographe avec sa photo
+     */
     async displayCardPhotographers() {
         const photographersData = await this.mediasApi.getPhotographers()
         const data = photographersData
@@ -46,7 +56,10 @@ export default class Profil {
             }
         })
     }
-
+    /**
+     * @param {Arrray} Arrray media of data
+     * affichage des media des phototagraphes par photographe
+     */
     async displayImagesPhotographers(contents) {
      
         contents.forEach((photo) => {
@@ -58,7 +71,7 @@ export default class Profil {
         })
     }
     /**
-     * @param {string} string media of data
+     * @param {Arrray} Arrray media of data
      */
     async displayLightBox(){
         // init data of lightbox
@@ -83,7 +96,10 @@ export default class Profil {
 
     
 
-    
+    /**
+     * @param {Array} Array media of data
+     * Incremment / decrement Likes
+     */
     async displayLikes() {
         const likesPhotographers = await this.mediasApi.getLikes()
         const likesData = likesPhotographers
@@ -135,19 +151,20 @@ export default class Profil {
             }
 
         }) 
-        //console.log(document.querySelector("#likes .fa-heart").classList.contains("liked"))
        
         this.likesElement.innerHTML = contentLike + contentPrice  
     } 
    
     /**
-     * @param {string} string media of data
+     * @param {Array} array media of data
      */
      async displayContactModal(){
-        // init data of lightbox
+        // init data of contactModal
         const conctactinfo = await this.mediasApi.getPhotographers()
 
-
+        /**
+        * Appel du fichier ContactForm qui gérre le formulaire de contact 
+        */
         conctactinfo.map((contactInfo) => {
             let newcontact = new ContactForm(contactInfo)
             if (contactInfo.id == this.idUrl) { 
@@ -171,6 +188,9 @@ export default class Profil {
             e.preventDefault();
             this.display(medias);
           });
+            /**
+            * Gestion de l'affcihage des medias après filtrage 
+            */
           document.querySelectorAll(".option").forEach((elt) => {
                 const select = document.querySelector("#dropdown")
                 const arrow = document.querySelector(".arrow")
@@ -179,7 +199,9 @@ export default class Profil {
                 document.querySelectorAll(".cardMedia").forEach((elt) => {
                     elt.remove();
               });
-              
+                /**
+                * filtrage 
+                */
                 const title = evt.target.value;
                 selectLabel.innerText = title
                 select.classList.toggle('hidden')
@@ -211,6 +233,9 @@ export default class Profil {
           });
       
     }
+    /**
+     * gestion de l'animation de type de filtre dans le select
+     */
     display(){
         const select = document.querySelector("#dropdown")
         const arrow = document.querySelector(".arrow")
@@ -220,7 +245,9 @@ export default class Profil {
     }
 
 }
-
+/**
+* Initialisation des fonctions pour la View
+*/
 const app = new Profil()
 app.displayCardPhotographers()
 app.displayImagesPhotographers(medias)

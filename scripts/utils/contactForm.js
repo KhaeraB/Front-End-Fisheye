@@ -10,7 +10,7 @@ export default class ContactForm{
       let form = document.getElementById("form-modal")
       form.addEventListener("submit", (event) => this.submit(event));
         
-        
+        // keyboard 
         const keys = (e) => {
             e.key === "Escape" && this.closeModal()
             if(e.key === "Tab" && e.currentTarget === document.querySelector(".modal #infoPhotographer #close")){
@@ -23,7 +23,7 @@ export default class ContactForm{
     }
     
    
-    
+    // Affichage du modal contact
     display(){
        
         this.modal.classList.add("displayForm")
@@ -59,6 +59,7 @@ export default class ContactForm{
        
         this.manageEl()
     } 
+    // gestion des events 
     manageEl(){
       document.querySelector(".modal #infoPhotographer #close").addEventListener('click', (e) => {
         if (e.target == e.currentTarget) {
@@ -67,7 +68,7 @@ export default class ContactForm{
         }
       })   
     }
-    
+    //fermeture du modal
     closeModal() {
         this.modal.classList.remove('displayForm')
     }
@@ -93,7 +94,7 @@ export default class ContactForm{
          const regEmail = new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
          return regEmail.test(email);
      };
- 
+ // verification prenom
     checkFirstName() {
         const firstName = document.getElementById('firstname');
         const formField = firstName.parentElement;
@@ -114,7 +115,7 @@ export default class ContactForm{
           return true;
         }
       };
-      
+      // verification nom
       checkLastName(){
         const lastName = document.getElementById('lastname');
         const formField = lastName.parentElement;
@@ -136,7 +137,7 @@ export default class ContactForm{
           return true;
         }
       };
-      
+      // verification email
       checkEmail(){
         const email = document.getElementById('email');
         const formField = email.parentElement;
@@ -158,7 +159,7 @@ export default class ContactForm{
          
         }
       };
-
+// verification message
       checkMessage(){
         const message = document.getElementById('message');
         const formField = message.parentElement;
@@ -175,7 +176,7 @@ export default class ContactForm{
           return true;
         }
       };
-
+//envoi
     submit(e) {
         e.preventDefault();
         // submit to the server if the form is valid
