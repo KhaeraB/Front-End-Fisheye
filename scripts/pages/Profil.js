@@ -232,7 +232,7 @@ export default class Profil {
             });
             
           });
-      
+       
     }
     /**
      * gestion de l'animation de type de filtre dans le select
