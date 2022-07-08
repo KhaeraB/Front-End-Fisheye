@@ -80,3 +80,17 @@ h1 {
     color: #757575;
     margin: 0;
 }
+@media ( min-width: 768px) and (max-width:1024px) {
+    #photographer_section {
+        display: flex;
+        flex-wrap: wrap;
+        margin:100px 60px;
+    }
+}
+@media (min-width: 460px) and (max-width: 768px){
+    #photographer_section {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 100px 60px;
+    }
+}

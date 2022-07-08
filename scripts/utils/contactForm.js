@@ -1,7 +1,3 @@
-import {
-    disableBodyScroll,
-    enableBodyScroll
-} from './body-scroll-lock.js'
 export default class ContactForm{
 
     constructor(photographer){
@@ -24,7 +20,6 @@ export default class ContactForm{
         }
      
         document.addEventListener('keydown', keys)
-        disableBodyScroll(this.display)
     }
     
    
@@ -75,7 +70,6 @@ export default class ContactForm{
     
     closeModal() {
         this.modal.classList.remove('displayForm')
-        enableBodyScroll(this.display)  
     }
 
      // requiered
